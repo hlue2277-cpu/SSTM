@@ -1,0 +1,277 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:interactivity="clr-namespace:SSTMTerminal.Behaviors"
+                    xmlns:lib_converters="clr-namespace:SSTMTerminal.Converters"
+                    xmlns:local="clr-namespace:SSTMTerminal.Controls">
+    <lib_converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" IsHidden="True" />
+    <RotateTransform x:Key="RotateTransform" Angle="-90" CenterX="25" CenterY="25" />
+
+    <Style x:Key="TopScrollBarButton" TargetType="{x:Type Button}">
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="IsTabStop" Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Image x:Name="m_Image"
+                               Width="{TemplateBinding Width}"
+                               Height="{TemplateBinding Height}"
+                               Source="../Images/up.png" />
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          RecognizesAccessKey="True" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Opacity" Value="0.3" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="m_Image" Property="Source" Value="../Images/upDisable.png" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BottomScrollBarButton" TargetType="{x:Type Button}">
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="IsTabStop" Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Image x:Name="m_Image"
+                               Width="{TemplateBinding Width}"
+                               Height="{TemplateBinding Height}"
+                               Source="../Images/down.png" />
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          RecognizesAccessKey="True" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Opacity" Value="0.3" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="m_Image" Property="Source" Value="../Images/downDisable.png" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ScrollBarStyle" TargetType="{x:Type ScrollBar}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollBar}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="37" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0"
+                                Width="37"
+                                Height="37"
+                                VerticalAlignment="Top"
+                                Command="{x:Static ScrollBar.PageUpCommand}"
+                                Style="{StaticResource TopScrollBarButton}">
+                            <Button.IsEnabled>
+                                <MultiBinding Converter="{x:Static lib_converters:ValueEqualToBooleanConverter.Instance}" ConverterParameter="reverse">
+                                    <Binding Path="Value" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    <Binding Path="Minimum" RelativeSource="{RelativeSource TemplatedParent}" />
+                                </MultiBinding>
+                            </Button.IsEnabled>
+                        </Button>
+                        <Button Grid.Column="2"
+                                Width="37"
+                                Height="37"
+                                VerticalAlignment="Bottom"
+                                Command="{x:Static ScrollBar.PageDownCommand}"
+                                Style="{StaticResource BottomScrollBarButton}">
+                            <Button.IsEnabled>
+                                <MultiBinding Converter="{x:Static lib_converters:ValueEqualToBooleanConverter.Instance}" ConverterParameter="reverse">
+                                    <Binding Path="Value" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    <Binding Path="Maximum" RelativeSource="{RelativeSource TemplatedParent}" />
+                                </MultiBinding>
+                            </Button.IsEnabled>
+                        </Button>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ScrollBar}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="37" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0"
+                                        Width="37"
+                                        Height="37"
+                                        HorizontalAlignment="Left"
+                                        Command="{x:Static ScrollBar.PageLeftCommand}"
+                                        RenderTransform="{StaticResource RotateTransform}"
+                                        Style="{StaticResource TopScrollBarButton}">
+                                    <Button.IsEnabled>
+                                        <MultiBinding Converter="{x:Static lib_converters:ValueEqualToBooleanConverter.Instance}" ConverterParameter="reverse">
+                                            <Binding Path="Value" RelativeSource="{RelativeSource TemplatedParent}" />
+                                            <Binding Path="Minimum" RelativeSource="{RelativeSource TemplatedParent}" />
+                                        </MultiBinding>
+                                    </Button.IsEnabled>
+                                </Button>
+                                <Button Grid.Column="2"
+                                        Width="37"
+                                        Height="37"
+                                        HorizontalAlignment="Right"
+                                        Command="{x:Static ScrollBar.PageRightCommand}"
+                                        RenderTransform="{StaticResource RotateTransform}"
+                                        Style="{StaticResource BottomScrollBarButton}">
+                                    <Button.IsEnabled>
+                                        <MultiBinding Converter="{x:Static lib_converters:ValueEqualToBooleanConverter.Instance}" ConverterParameter="reverse">
+                                            <Binding Path="Value" RelativeSource="{RelativeSource TemplatedParent}" />
+                                            <Binding Path="Maximum" RelativeSource="{RelativeSource TemplatedParent}" />
+                                        </MultiBinding>
+                                    </Button.IsEnabled>
+                                </Button>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <ControlTemplate x:Key="ScrollViewerControlTemplate" TargetType="{x:Type ScrollViewer}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Border Background="White"></Border>
+            <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
+                                    VerticalAlignment="Top"
+                                    CanContentScroll="{TemplateBinding CanContentScroll}"
+                                    CanHorizontallyScroll="False"
+                                    CanVerticallyScroll="False"
+                                    Content="{TemplateBinding Content}"
+                                    ContentTemplate="{TemplateBinding ContentTemplate}" />
+            <StackPanel Grid.Row="1"
+                        Margin="{Binding PagerNavigatorMargin, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:PagableListBox}, AncestorLevel=1}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Orientation="Horizontal"
+                        Visibility="{Binding IsPagerNavigatorVisible, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:PagableListBox}, AncestorLevel=1}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <Grid>
+                    <ScrollBar x:Name="PART_VerticalScrollBar"
+                               Width="114"
+                               Height="37"
+                               AutomationProperties.AutomationId="VerticalScrollBar"
+                               Cursor="Arrow"
+                               Maximum="{TemplateBinding ScrollableHeight}"
+                               Minimum="0"
+                               Style="{StaticResource ScrollBarStyle}"
+                               ViewportSize="{TemplateBinding ViewportHeight}"
+                               Value="{Binding Path=VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="ValueChanged">
+                                <interactivity:InvokeDelegateCommandAction Command="{Binding PageChangeCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:PagableListBox}, AncestorLevel=1}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ScrollBar>
+                    <ScrollBar x:Name="PART_HorizontalScrollBar"
+                               Width="114"
+                               Height="37"
+                               AutomationProperties.AutomationId="HorizontalScrollBar"
+                               Cursor="Arrow"
+                               Maximum="{TemplateBinding ScrollableWidth}"
+                               Minimum="0"
+                               Orientation="Horizontal"
+                               Style="{StaticResource ScrollBarStyle}"
+                               ViewportSize="{TemplateBinding ViewportWidth}"
+                               Value="{Binding Path=HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="ValueChanged">
+                                <interactivity:InvokeDelegateCommandAction Command="{Binding PageChangeCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:PagableListBox}, AncestorLevel=1}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ScrollBar>
+                </Grid>
+                <StackPanel Margin="40,0,0,0" Visibility="Collapsed"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                    <TextBlock FontSize="16"
+                               Foreground="Black"
+                               Text="{Binding CurrentPageIndex, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:PagableListBox}, AncestorLevel=1}, Mode=TwoWay, StringFormat='{}{0:(0}'}" />
+                    <TextBlock FontSize="16"
+                               Foreground="Black"
+                               Text="{Binding TotalPage, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:PagableListBox}, AncestorLevel=1}, Mode=TwoWay, StringFormat='{}{0: / 0)}'}" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <DataTrigger Binding="{Binding Path=ScrollMode, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:PagableListBox}, AncestorLevel=1}}" Value="HORIZONTAL">
+                <Setter TargetName="PART_VerticalScrollBar" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=ScrollMode, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:PagableListBox}, AncestorLevel=1}}" Value="VERTICAL">
+                <Setter TargetName="PART_HorizontalScrollBar" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ItemsPanelTemplate x:Key="HorizontalItemsPanelStyle">
+        <WrapPanel IsItemsHost="True" Orientation="Vertical"/>
+    </ItemsPanelTemplate>
+
+    <ItemsPanelTemplate x:Key="VerticalItemsPanelStyle">
+        <WrapPanel IsItemsHost="True" Orientation="Horizontal"/>
+    </ItemsPanelTemplate>
+
+    <Style TargetType="{x:Type local:PagableListBox}">
+        <Setter Property="Padding" Value="0,0,0,0" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:PagableListBox}">
+                    <Border Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}">
+                        <ScrollViewer Padding="{TemplateBinding Padding}"
+                                      CanContentScroll="true"
+                                      Focusable="false"
+                                      Margin="0"
+                                      Template="{StaticResource ScrollViewerControlTemplate}">
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Path=ScrollMode, RelativeSource={RelativeSource Self}}" Value="HORIZONTAL">
+                            <Setter Property="ItemsPanel" Value="{StaticResource HorizontalItemsPanelStyle}" />
+                            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=ScrollMode, RelativeSource={RelativeSource Self}}" Value="VERTICAL">
+                            <Setter Property="ItemsPanel" Value="{StaticResource VerticalItemsPanelStyle}" />
+                            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

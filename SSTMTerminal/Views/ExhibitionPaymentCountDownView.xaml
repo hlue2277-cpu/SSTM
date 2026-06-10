@@ -1,0 +1,98 @@
+﻿<controls:NotifyUC x:Class="SSTMTerminal.Views.ExhibitionPaymentCountDownView"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:controls="clr-namespace:SSTMTerminal.Controls"
+                   xmlns:converters="clr-namespace:SSTMTerminal.Converters"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:local="clr-namespace:SSTMTerminal.Views"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   x:Name="m_self"
+                   IsTimerEnable="{Binding IsTimerEnable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                   TimeOutCommand="{Binding BackToHomeCommand}"
+				   CountDown="{Binding CountDown, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                   mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:BooleanToVisibilityConverter x:Key="ReverseBooleanToVisibilityConverter" IsOpposite="True" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="190" />
+            <RowDefinition Height="845" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="114" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Visibility="{Binding TitleVisibility}">
+            <Border.Background>
+                <ImageBrush ImageSource="{Binding TitleImageSource}" Stretch="None"/>
+            </Border.Background>
+        </Border>
+
+        <Border Grid.Row="2">
+            <Border.Background>
+                <ImageBrush ImageSource="/SSTMTerminal;component/Images/GroupRectangle.png" Stretch="None"/>
+            </Border.Background>
+            <Grid Margin="50">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="170" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="180" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+						   FontSize="38" FontFamily="微软雅黑" Text="请将微信、支付宝或者银联付款码" />
+                <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"
+					   FontSize="38" FontFamily="微软雅黑" Text="置于下方扫码口，扫码完成支付" />
+
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"
+					   FontFamily="微软雅黑" FontSize="34">
+                        <Run Text="{Binding TicketType}" />
+                        <Run Text="{Binding VisitorCount}" />
+                        <Run Text="张" />
+                    </TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1"  HorizontalAlignment="Left" VerticalAlignment="Center"
+					   FontFamily="微软雅黑" FontSize="34">
+                        <Run Text="支付金额: " />
+                        <Run Text="{Binding TotalPrice}" />
+                        <Run Text="元" />
+                    </TextBlock>
+                    <!--<TextBlock Grid.Column="1" Grid.Row="2"  HorizontalAlignment="Left" VerticalAlignment="Center"
+					   FontFamily="微软雅黑" FontSize="34">
+                        <Run Text="支付方式: " />
+                        <Run Text="{Binding PayMethod}" />
+                    </TextBlock>-->
+                </Grid>
+
+                <TextBlock Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center"
+						   FontFamily="微软雅黑" FontSize="38">
+                    <Run Text="{Binding CountDown, ElementName=m_self, Mode=OneWay}" />
+                    <Run Text=" 秒后将关闭订单" />
+                </TextBlock>
+            </Grid>
+        </Border>
+
+        <Button Grid.Row="4" Width="844" Command="{Binding BackToHomeCommand}"
+				Visibility="{Binding BackButtonVisibility}" OverridesDefaultStyle="True">
+            <Button.Content>
+                <Image Source="/SSTMTerminal;component/Images/BackBig.png" />
+            </Button.Content>
+        </Button>
+    </Grid>
+</controls:NotifyUC>

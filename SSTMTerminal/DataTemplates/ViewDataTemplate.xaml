@@ -1,0 +1,33 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:viewModels="clr-namespace:SSTMTerminal.ViewModels"
+	xmlns:views="clr-namespace:SSTMTerminal.Views">
+
+
+	<DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
+		<views:HomeView />
+	</DataTemplate>
+
+	<DataTemplate DataType="{x:Type viewModels:MsgViewModel}">
+		<views:MsgView />
+	</DataTemplate>
+
+	<DataTemplate DataType="{x:Type viewModels:PrintingViewModel}">
+		<views:PrintingView />
+	</DataTemplate>
+
+	<DataTemplate DataType="{x:Type viewModels:MsgWithoutCountDownViewModel}">
+		<views:MsgWithoutCountDownView />
+	</DataTemplate>
+
+	<DataTemplate DataType="{x:Type viewModels:SelectTicketsViewModel}">
+		<views:SelectTicketsView />
+	</DataTemplate>
+
+	<DataTemplate DataType="{x:Type viewModels:GetTicketByInputIDViewModel}">
+		<views:GetTicketByInputIDView />
+	</DataTemplate>
+
+
+</ResourceDictionary>

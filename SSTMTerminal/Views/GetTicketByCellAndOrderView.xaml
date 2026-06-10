@@ -1,0 +1,483 @@
+﻿<UserControl x:Class="SSTMTerminal.Views.GetTicketByCellAndOrderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:behavior="clr-namespace:SSTMTerminal.Behaviors"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SSTMTerminal.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             mc:Ignorable="d">
+	<UserControl.Resources>
+		<BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
+	</UserControl.Resources>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="100" />
+			<RowDefinition Height="50" />
+			<RowDefinition Height="222" />
+			<RowDefinition Height="35" />
+			<RowDefinition Height="867" />
+			<RowDefinition Height="50" />
+			<RowDefinition Height="114" />
+		</Grid.RowDefinitions>
+
+		<Border Grid.Row="0">
+			<Border.Background>
+				<ImageBrush ImageSource="/SSTMTerminal;component/Images/CellAndOrderPageTitle.png"  Stretch="None"/>
+			</Border.Background>
+		</Border>
+
+		<Border Grid.Row="2">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="500"/>
+					<ColumnDefinition Width="42"/>
+					<ColumnDefinition Width="300" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="70"/>
+					<RowDefinition Height="152"/>
+				</Grid.RowDefinitions>
+				<Border Grid.Row="0" Grid.Column="0">
+					<Image Source="/SSTMTerminal;component/Images/CellPhoneLabel.png" HorizontalAlignment="Left"  Stretch="None"/>
+				</Border>
+				<Border Grid.Row="0" Grid.Column="2">
+					<Image Source="/SSTMTerminal;component/Images/OrderLabel.png" HorizontalAlignment="Left"  Stretch="None"/>
+				</Border>
+				<Border Grid.Row="1" Grid.Column="0">
+					<Border.Background>
+						<ImageBrush ImageSource="/SSTMTerminal;component/Images/TicketItemRectangle.png" Stretch="Fill"/>
+					</Border.Background>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<StackPanel Orientation="Vertical" Grid.Column="0" VerticalAlignment="Center">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition/>
+								</Grid.ColumnDefinitions>
+								<TextBox x:Name="txtCell" Grid.Column="0"
+											Text="{Binding CellNumber, UpdateSourceTrigger=PropertyChanged}"
+											 BorderThickness="0" 
+											 MaxWidth="360"
+											 Width="360"
+											 Height="100"
+											 Margin="41,0,10,0" 
+											 BorderBrush="Transparent"  
+											 HorizontalAlignment="Left" 
+											 VerticalAlignment="Top"
+											 VerticalContentAlignment="Center"
+											 FontSize="40" 
+											 Foreground="#3C3C3C"
+											 FontFamily="微软雅黑"
+											 GotFocus="CellOrOrderTextBox_GotFocus">
+									<!--<i:Interaction.Triggers>
+										<i:EventTrigger EventName="GotFocus">
+											<i:InvokeCommandAction Command="{Binding FieldFocusedCommand}" CommandParameter="CellNumber"/>
+										</i:EventTrigger>
+									</i:Interaction.Triggers>-->
+								</TextBox>
+								<Image Grid.Column="0" Margin="40,0,10,0"
+										HorizontalAlignment="Left" 
+										VerticalAlignment="Center"
+										IsHitTestVisible="False"
+										Source="/SSTMTerminal;component/Images/Input.png" 
+										Stretch="None">
+									<Image.Style>
+										<Style TargetType="{x:Type Image}">
+											<Setter Property="Visibility" Value="Collapsed"/>
+											<Style.Triggers>
+												<DataTrigger Binding="{Binding Text, ElementName=txtCell}" Value="">
+													<Setter Property="Visibility" Value="Visible"/>
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</Image.Style>
+								</Image>
+							</Grid>
+						</StackPanel>
+						<Button Grid.Column="1"
+							HorizontalAlignment="Right"
+							VerticalAlignment="Center" 
+							Margin="10"
+							OverridesDefaultStyle="True"
+							Visibility="{Binding ShowClearCellButton,Converter={StaticResource booleanToVisibilityConverter}}"
+							Command="{Binding ClearCellCommand}">
+							<Button.Content>
+								<Image Source="/SSTMTerminal;component/Images/Clear.png" Stretch="None" />
+							</Button.Content>
+						</Button>
+					</Grid>
+				</Border>
+
+				<Border Grid.Row="1" Grid.Column="2">
+					<Border.Background>
+						<ImageBrush ImageSource="/SSTMTerminal;component/Images/TicketItemRectangle.png" Stretch="Fill"/>
+					</Border.Background>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<StackPanel Orientation="Vertical" Grid.Column="0" VerticalAlignment="Center">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition/>
+								</Grid.ColumnDefinitions>
+								<TextBox x:Name="txtOrder" Grid.Column="0"
+											Text="{Binding OrderNumber, UpdateSourceTrigger=PropertyChanged}"
+											BorderThickness="0" 
+											MaxWidth="260"
+											Width="260"
+											Height="100"
+											Margin="41,0,10,0" 
+											BorderBrush="Transparent"  
+											HorizontalAlignment="Left" 
+											VerticalAlignment="Top"
+											VerticalContentAlignment="Center"
+											FontSize="40" 
+											Foreground="#3C3C3C"
+											FontFamily="微软雅黑"
+											GotFocus="CellOrOrderTextBox_GotFocus">
+									<!--<i:Interaction.Triggers>
+										<i:EventTrigger EventName="GotFocus">
+											<i:InvokeCommandAction Command="{Binding FieldFocusedCommand}" CommandParameter="OrderNumber"/>
+										</i:EventTrigger>
+									</i:Interaction.Triggers>-->
+								</TextBox>
+								<Image Grid.Column="0" Margin="40,0,10,0"
+										HorizontalAlignment="Left" 
+										VerticalAlignment="Center"
+										IsHitTestVisible="False"
+										Source="/SSTMTerminal;component/Images/Input.png" 
+										Stretch="None">
+									<Image.Style>
+										<Style TargetType="{x:Type Image}">
+											<Setter Property="Visibility" Value="Collapsed"/>
+											<Style.Triggers>
+												<DataTrigger Binding="{Binding Text, ElementName=txtOrder}" Value="">
+													<Setter Property="Visibility" Value="Visible"/>
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</Image.Style>
+								</Image>
+							</Grid>
+						</StackPanel>
+						<!--<Button Grid.Column="1"
+							HorizontalAlignment="Right"
+							VerticalAlignment="Center" 
+							Margin="10"
+							OverridesDefaultStyle="True"
+							Visibility="{Binding ShowClearButton,Converter={StaticResource booleanToVisibilityConverter}}"
+							Command="{Binding ClearCommand}"
+						>
+							<Button.Content>
+								<Image Source="/SSTMTerminal;component/Images/Clear.png" Stretch="None" />
+							</Button.Content>
+						</Button>-->
+					</Grid>
+				</Border>
+
+			</Grid>
+		</Border>
+
+		<Border Grid.Row="4">
+			<Border.Background>
+				<ImageBrush ImageSource="/SSTMTerminal;component/Images/KeyboardBackground.png" Stretch="None"/>
+			</Border.Background>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="842"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid Grid.Column="0" Visibility="{Binding ShowNumberKeyboard, Converter={StaticResource booleanToVisibilityConverter}}">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="70"/>
+						<RowDefinition Height="160"/>
+						<RowDefinition Height="30"/>
+						<RowDefinition Height="160"/>
+						<RowDefinition Height="30"/>
+						<RowDefinition Height="160"/>
+						<RowDefinition Height="30"/>
+						<RowDefinition Height="160"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="90"/>
+						<ColumnDefinition Width="200"/>
+						<ColumnDefinition Width="30"/>
+						<ColumnDefinition Width="200"/>
+						<ColumnDefinition Width="30"/>
+						<ColumnDefinition Width="200"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
+					<Button Grid.Column="1" Grid.Row="1" x:Name="button1" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="1">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/1.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="3" Grid.Row="1" x:Name="button2" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="2">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/2.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="5" Grid.Row="1" x:Name="button3" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="3">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/3.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="1" Grid.Row="3" x:Name="button4" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="4">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/4.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="3" Grid.Row="3" x:Name="button5" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="5">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/5.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="5" Grid.Row="3" x:Name="button6" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="6">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/6.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="1" Grid.Row="5" x:Name="button7" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="7">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/7.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="3" Grid.Row="5" x:Name="button8" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="8">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/8.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="5" Grid.Row="5" x:Name="button9" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="9">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/9.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="1" Grid.Row="7" x:Name="buttonDeleteAlpha" OverridesDefaultStyle="True" IsEnabled="False" 
+						Command="{Binding SwitchKeyboardCommand}">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/abc.png"/>
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="3" Grid.Row="7" x:Name="button0" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="0">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/0.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="5" Grid.Row="7" x:Name="btnDeleteNumber" OverridesDefaultStyle="True"
+							Click="RemoveNumberOrAlpha_Click">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/DeleteNumber.png" />
+						</Button.Content>
+					</Button>
+				</Grid>
+
+				<Grid Grid.Column="0" Visibility="{Binding ShowAlphaKeyboard, Converter={StaticResource booleanToVisibilityConverter}}">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="70" />
+						<RowDefinition Height="100" />
+						<RowDefinition Height="20" />
+						<RowDefinition Height="100" />
+						<RowDefinition Height="20" />
+						<RowDefinition Height="100" />
+						<RowDefinition Height="20" />
+						<RowDefinition Height="100" />
+						<RowDefinition Height="20" />
+						<RowDefinition Height="100" />
+						<RowDefinition Height="20" />
+						<RowDefinition Height="100" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="31"/>
+						<ColumnDefinition Width="140"/>
+						<ColumnDefinition Width="20"/>
+						<ColumnDefinition Width="140"/>
+						<ColumnDefinition Width="20"/>
+						<ColumnDefinition Width="140"/>
+						<ColumnDefinition Width="20"/>
+						<ColumnDefinition Width="140"/>
+						<ColumnDefinition Width="20"/>
+						<ColumnDefinition Width="140"/>
+						<ColumnDefinition Width="*"/>
+					</Grid.ColumnDefinitions>
+
+					<!--A~E-->
+					<Button Grid.Column="1" Grid.Row="1" x:Name="buttonA" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="A">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/a.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="3" Grid.Row="1" x:Name="buttonB" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="B">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/b.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="5" Grid.Row="1" x:Name="buttonC" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="C">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/c.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="7" Grid.Row="1" x:Name="buttonD" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="D">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/d.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="9" Grid.Row="1" x:Name="buttonE" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="E">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/e.png" />
+						</Button.Content>
+					</Button>
+
+					<!--F~J-->
+					<Button Grid.Column="1" Grid.Row="3" x:Name="buttonF" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="F">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/f.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="3" Grid.Row="3" x:Name="buttonG" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="G">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/g.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="5" Grid.Row="3" x:Name="buttonH" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="H">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/h.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="7" Grid.Row="3" x:Name="buttonI" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="I">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/i.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="9" Grid.Row="3" x:Name="buttonJ" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="J">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/j.png" />
+						</Button.Content>
+					</Button>
+					<!--K~O-->
+					<Button Grid.Column="1" Grid.Row="5" x:Name="buttonK" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="K">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/k.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="3" Grid.Row="5" x:Name="buttonL" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="L">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/l.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="5" Grid.Row="5" x:Name="buttonM" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="M">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/m.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="7" Grid.Row="5" x:Name="buttonN" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="N">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/n.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="9" Grid.Row="5" x:Name="buttonO" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="O">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/o.png" />
+						</Button.Content>
+					</Button>
+					<!--P~T-->
+					<Button Grid.Column="1" Grid.Row="7" x:Name="buttonP" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="P">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/p.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="3" Grid.Row="7" x:Name="buttonQ" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="Q">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/q.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="5" Grid.Row="7" x:Name="buttonR" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="R">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/r.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="7" Grid.Row="7" x:Name="buttonS" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="S">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/s.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="9" Grid.Row="7" x:Name="buttonT" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="T">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/t.png" />
+						</Button.Content>
+					</Button>
+					<!--U~Y-->
+					<Button Grid.Column="1" Grid.Row="9" x:Name="buttonU" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="U">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/u.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="3" Grid.Row="9" x:Name="buttonV" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="V">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/v.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="5" Grid.Row="9" x:Name="buttonW" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="W">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/w.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="7" Grid.Row="9" x:Name="buttonX" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="X">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/x.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="9" Grid.Row="9" x:Name="buttonY" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="Y">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/y.png" />
+						</Button.Content>
+					</Button>
+					<!--123, Z, Remove-->
+					<Button Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="3" x:Name="buttonBackTo123" OverridesDefaultStyle="True"
+						Command="{Binding SwitchKeyboardCommand}">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/123.png" />
+						</Button.Content>
+					</Button>
+
+					<Button Grid.Column="5" Grid.Row="11" x:Name="buttonZ" OverridesDefaultStyle="True" Click="InputNumberOrAlpha_Click" Tag="Z">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/z.png" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="7" Grid.Row="11" Grid.ColumnSpan="3"  x:Name="btnDeleteAlpha" OverridesDefaultStyle="True"
+						 Click="RemoveNumberOrAlpha_Click">
+						<Button.Content>
+							<Image Source="/SSTMTerminal;component/Images/DeleteAlpha.png" />
+						</Button.Content>
+					</Button>
+				</Grid>
+			</Grid>
+		</Border>
+
+		<Grid Grid.Row="6">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="290" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="521" />
+			</Grid.ColumnDefinitions>
+			<Button Grid.Column="0" Command="{Binding BackToHomeCommand}" OverridesDefaultStyle="True">
+				<Button.Content>
+					<Image Source="/SSTMTerminal;component/Images/BackSmall.png" />
+				</Button.Content>
+			</Button>
+			<Button Grid.Column="2" Command="{Binding ConfirmCommand}" IsEnabled="{Binding IsEnableConfirm}" OverridesDefaultStyle="True">
+				<Button.Content>
+					<Image Source="{Binding ConfirmImageSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+				</Button.Content>
+			</Button>
+		</Grid>
+	</Grid>
+</UserControl>

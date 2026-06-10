@@ -1,0 +1,64 @@
+﻿<controls:NotifyUC x:Class="SSTMTerminal.Views.MsgView"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:controls="clr-namespace:SSTMTerminal.Controls"
+                   xmlns:converters="clr-namespace:SSTMTerminal.Converters"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:local="clr-namespace:SSTMTerminal.Views"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   x:Name="m_self"
+                   IsTimerEnable="{Binding IsTimerEnable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                   TimeOutCommand="{Binding BackToHomeCommand}"
+				   CountDown="{Binding CountDown, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                   mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:BooleanToVisibilityConverter x:Key="ReverseBooleanToVisibilityConverter" IsOpposite="True" />
+    </UserControl.Resources>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="100" />
+			<RowDefinition Height="190" />
+			<RowDefinition Height="845" />
+			<RowDefinition Height="35" />
+			<RowDefinition Height="114" />
+		</Grid.RowDefinitions>
+
+		<Border Grid.Row="0" Visibility="{Binding TitleVisibility}">
+			<Border.Background>
+				<ImageBrush ImageSource="{Binding TitleImageSource}" Stretch="None"/>
+			</Border.Background>
+		</Border>
+
+		<Border Grid.Row="2">
+			<Border.Background>
+				<ImageBrush ImageSource="/SSTMTerminal;component/Images/GroupRectangle.png" Stretch="None"/>
+			</Border.Background>
+			<Grid Margin="50">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="80" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="60" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+
+				<Image Grid.Row="0" Source="{Binding ContentImageSource}" Stretch="None" />
+				<TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"
+						   FontSize="38" FontFamily="微软雅黑" Text="{Binding Message}" />
+				<TextBlock Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center"
+						   FontFamily="微软雅黑" FontSize="30">
+                    <Run Text="{Binding CountDown, ElementName=m_self, Mode=OneWay}" />
+                    <Run Text=" 秒" />
+				</TextBlock>
+			</Grid>
+		</Border>
+
+		<Button Grid.Row="4" Width="844" Command="{Binding BackToHomeCommand}"
+				Visibility="{Binding BackButtonVisibility}" OverridesDefaultStyle="True">
+			<Button.Content>
+				<Image Source="/SSTMTerminal;component/Images/BackBig.png" />
+			</Button.Content>
+		</Button>
+	</Grid>
+</controls:NotifyUC>

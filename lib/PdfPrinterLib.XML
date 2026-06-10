@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PdfPrinterLib</name>
+    </assembly>
+    <members>
+        <member name="M:PdfPrinterLib.PdfPrinter.PrintPDF(System.String,System.String,System.String,System.Int32,System.Int32,System.Drawing.Printing.Margins,System.Drawing.Printing.PrinterResolution,System.Boolean)">
+            <summary>
+            打印远程PDF文件
+            </summary>
+            <param name="url">PDF文件所在url连接</param>
+            <param name="fileName">PDF文件名</param>
+            <param name="printerName">打印机名</param>
+            <param name="paperWidth">打印纸宽 单位1/100英寸</param>
+            <param name="paperHeight">打印纸高 单位1/100英寸</param>
+            <param name="margin">边距</param>
+            <param name="printerResolution">打印机分辨率</param>
+            <param name="landscape">是否横向打印</param>
+            <returns>成功返回true  失败返回false</returns>
+        </member>
+        <member name="M:PdfPrinterLib.PdfPrinter.PrintPDF(System.String,System.String,System.Int32,System.Int32,System.Drawing.Printing.Margins,System.Drawing.Printing.PrinterResolution,System.Boolean)">
+            <summary>
+            打印本地PDF文件
+            </summary>
+            <param name="fileName">PDF文件名</param>
+            <param name="printerName">打印机名</param>
+            <param name="paperWidth">打印纸宽 单位1/100英寸</param>
+            <param name="paperHeight">打印纸高 单位1/100英寸</param>
+            <param name="margin">边距</param>
+            <param name="printerResolution">打印机分辨率</param>
+            <param name="landscape">是否横向打印</param>
+            <returns>成功返回true  失败返回false</returns>
+        </member>
+        <member name="M:PdfPrinterLib.HttpDownload.DownloadFile(System.String,System.String)">
+            <summary>
+            下载文件
+            </summary>
+            <param name="URL">下载文件地址</param>
+            <param name="Filename">下载后另存为（全路径）</param>
+        </member>
+    </members>
+</doc>

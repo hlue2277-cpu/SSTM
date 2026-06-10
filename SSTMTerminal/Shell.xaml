@@ -1,0 +1,88 @@
+﻿<Window x:Class="SSTMTerminal.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:SSTMTerminal.Controls"
+        xmlns:converters="clr-namespace:SSTMTerminal.Converters"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:genesis="http://www.sstm.info/genesis"
+        xmlns:local="clr-namespace:SSTMTerminal"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="SSTM Terminal"
+        Width="1080"
+        Height="1920"
+        Background="Black"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        PreviewKeyDown="Window_PreviewKeyDown"
+        WindowState="Maximized"
+        WindowStyle="None"
+        mc:Ignorable="d">
+	
+	<!--Topmost="True"-->
+	
+    <Window.Resources>
+        <controls:LoadingControlWrapper x:Key="LoadingControlWrapper" />
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
+    <Viewbox>
+        <Grid Width="1080" Height="1920">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="160" />
+                <RowDefinition Height="1600"/>
+				<RowDefinition Height="160" />
+            </Grid.RowDefinitions>
+
+			<Canvas x:Name="printCanvas" Grid.Row="0">
+				<Border x:Name="printBd" />
+			</Canvas>
+
+            <Border Grid.Row="0" Grid.RowSpan="3">
+                <Border.Background>
+					<ImageBrush x:Name="defaultMainBgImg" ImageSource="/SSTMTerminal;component/Images/Background.png" Stretch="Fill" />
+                </Border.Background>
+            </Border>
+
+
+			<ContentControl Grid.Row="0"
+                            genesis:Zone.Name="TopRegion"
+                            FocusVisualStyle="{x:Null}" />
+
+			<ContentControl Grid.Row="2"
+                            genesis:Zone.Name="BottomRegion"
+                            FocusVisualStyle="{x:Null}" />
+
+			<ContentControl Grid.Row="1"
+							HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+							HorizontalAlignment="Center"
+							VerticalAlignment="Center"
+                            genesis:Zone.Name="WorkingCenterRegion"
+                            FocusVisualStyle="{x:Null}" />
+
+			<ContentControl Grid.Row="1"
+							HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Top"
+							HorizontalAlignment="Center"
+							VerticalAlignment="Top"
+                            genesis:Zone.Name="CenterRegion"
+                            FocusVisualStyle="{x:Null}"
+                            x:Name="CenterRegionControl"/>
+
+			<ContentControl Grid.Row="0"
+							Grid.RowSpan="3"
+							HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Top"
+							HorizontalAlignment="Center"
+							VerticalAlignment="Top"
+                            genesis:Zone.Name="HomeRegion"
+                            FocusVisualStyle="{x:Null}" />
+
+
+			<controls:LoadingControl Grid.RowSpan="3"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     IsBusy="{Binding Instance.IsBusy, Source={StaticResource LoadingControlWrapper}}"
+                                     Message="{Binding Instance.Message, Source={StaticResource LoadingControlWrapper}}" />
+        </Grid>
+    </Viewbox>
+</Window>

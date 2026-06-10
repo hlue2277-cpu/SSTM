@@ -1,0 +1,21 @@
+﻿<Canvas Background="{x:Null}" Name="cavLayout" Tag="raw" Width="330" Height="230" Margin="5,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" AllowDrop="True" Canvas.Top="-10" Canvas.Right="0" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Label Foreground="#FF000000" FontFamily="微软雅黑" FontSize="22" FontStyle="Normal" FontWeight="Normal" Name="DT_180621014631761" Tag="0" ToolTip="动态标签_定单" Canvas.Left="0" Canvas.Top="100">[orderid]</Label>
+  <Label Foreground="#FF000000" FontFamily="微软雅黑" FontSize="20" FontStyle="Normal" FontWeight="Normal" Name="DT_180727202501150" Tag="0" ToolTip="动态标签_景点名称" Canvas.Left="0" Canvas.Top="10">[only_spotname]</Label>
+  <Label Foreground="#FF000000" FontFamily="微软雅黑" FontSize="18" FontStyle="Normal" FontWeight="Normal" Name="DT_180727202640489" Tag="0" ToolTip="动态标签_门票信息" Canvas.Left="0" Canvas.Top="56">[only_resourcename]</Label>
+  <Label Foreground="#FF000000" FontFamily="微软雅黑" FontSize="26" FontStyle="Normal" FontWeight="Bold" Name="DT_180727202819251" Tag="0" ToolTip="动态标签_纯人次" Canvas.Left="73" Canvas.Top="163">[only_count]</Label>
+
+<Label Foreground="#FF000000" FontFamily="微软雅黑" FontSize="18" FontStyle="Normal" FontWeight="Normal" Name="Lable180727203013271" Tag="0" ToolTip="静态标签" Canvas.Left="0" Canvas.Top="485">打印时间：</Label>
+
+  <Label Foreground="#FF000000" FontFamily="微软雅黑" FontSize="18" FontStyle="Normal" FontWeight="Normal" Name="DT_180727203036884" Tag="0" ToolTip="动态标签_中文年月日" Canvas.Left="96" Canvas.Top="485">[date_cn_yyMMdd]</Label>
+  <Label Foreground="#FF000000" FontFamily="微软雅黑" FontSize="18" FontStyle="Normal" FontWeight="Normal" Name="DT_180727203044883" Tag="0" ToolTip="动态标签_中文时分秒" Canvas.Left="214" Canvas.Top="485">[date_cn_HHmmss]</Label>
+  <Label Foreground="#FF000000" FontFamily="微软雅黑" FontSize="26" FontStyle="Normal" FontWeight="Normal" Name="Lable180727203321104" Tag="0" ToolTip="静态标签" Canvas.Left="0" Canvas.Top="163">人次：</Label>
+
+  <Label Foreground="#FF000000" FontFamily="微软雅黑" FontSize="18" FontStyle="Normal" FontWeight="Normal" Name="Lable180812191000017" Tag="0" ToolTip="静态标签" Canvas.Left="0" Canvas.Top="230">金圃宅第（枫泾历史陈列馆）</Label>
+  <Label Foreground="#FF000000" FontFamily="微软雅黑" FontSize="18" FontStyle="Normal" FontWeight="Normal" Name="Lable180812191000010" Tag="0" ToolTip="静态标签" Canvas.Left="0" Canvas.Top="260">丁蹄作坊</Label>
+  <Label Foreground="#FF000000" FontFamily="微软雅黑" FontSize="18" FontStyle="Normal" FontWeight="Normal" Name="Lable180812191000011" Tag="0" ToolTip="静态标签" Canvas.Left="0" Canvas.Top="290">婚俗馆</Label>
+  <Label Foreground="#FF000000" FontFamily="微软雅黑" FontSize="18" FontStyle="Normal" FontWeight="Normal" Name="Lable180812191000012" Tag="0" ToolTip="静态标签" Canvas.Left="0" Canvas.Top="320">张慈中装帧艺术馆</Label>
+  <Label Foreground="#FF000000" FontFamily="微软雅黑" FontSize="18" FontStyle="Normal" FontWeight="Normal" Name="Lable180812191000013" Tag="0" ToolTip="静态标签" Canvas.Left="0" Canvas.Top="350">朱学范生平陈列馆</Label>
+  <Label Foreground="#FF000000" FontFamily="微软雅黑" FontSize="18" FontStyle="Normal" FontWeight="Normal" Name="Lable180812191000014" Tag="0" ToolTip="静态标签" Canvas.Left="0" Canvas.Top="380">丁聪漫画陈列馆</Label>
+  <Label Foreground="#FF000000" FontFamily="微软雅黑" FontSize="18" FontStyle="Normal" FontWeight="Normal" Name="Lable180812191000015" Tag="0" ToolTip="静态标签" Canvas.Left="0" Canvas.Top="410">人民公社旧址·毛泽东像章馆</Label>
+  <Label Foreground="#FF000000" FontFamily="微软雅黑" FontSize="18" FontStyle="Normal" FontWeight="Normal" Name="Lable180812191000016" Tag="0" ToolTip="静态标签" Canvas.Left="0" Canvas.Top="440">程十发祖居</Label>
+</Canvas>

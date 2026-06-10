@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PrintingNameToValueMappingConfig>
+<NameToValueMappingMappings>
+  <NameToValueMapping>
+    <TemplateString>[voucherNo]</TemplateString>
+    <Expression>(ticket, now) => ticket.voucherNo</Expression>
+  </NameToValueMapping>
+  <NameToValueMapping>
+    <TemplateString>[TwoBarcodeInfo]</TemplateString>
+    <Expression>(ticket, now) => ticket.TwoBarcodeInfo</Expression>
+  </NameToValueMapping>
+  <NameToValueMapping>
+    <TemplateString>[uuid]</TemplateString>
+    <Expression>(ticket, now) => ticket.uuid</Expression>
+  </NameToValueMapping>
+  <NameToValueMapping>
+    <TemplateString>[scheduleCnName]</TemplateString>
+    <Expression>(ticket, now) => ticket.scheduleCnName</Expression>
+  </NameToValueMapping>
+  <NameToValueMapping>
+    <TemplateString>[scheduleRemark]</TemplateString>
+    <Expression>(ticket, now) => ticket.scheduleRemark</Expression>
+  </NameToValueMapping>
+  <NameToValueMapping>
+    <TemplateString>[scheduleEnName]</TemplateString>
+    <Expression>(ticket, now) => ticket.scheduleEnName</Expression>
+  </NameToValueMapping>
+  <NameToValueMapping>
+    <TemplateString>[stadiumCnName]</TemplateString>
+    <Expression>(ticket, now) => ticket.stadiumCnName</Expression>
+  </NameToValueMapping>
+  <NameToValueMapping>
+    <TemplateString>[programCnName]</TemplateString>
+    <Expression>(ticket, now) => ticket.programCnName</Expression>
+  </NameToValueMapping>
+  <NameToValueMapping>
+    <TemplateString>[userName]</TemplateString>
+    <Expression>(ticket, now) => ticket.userName</Expression>
+  </NameToValueMapping>
+  <NameToValueMapping>
+    <TemplateString>[lineno]</TemplateString>
+    <Expression>(ticket, now) => ticket.lineno</Expression>
+  </NameToValueMapping>
+  <NameToValueMapping>
+    <TemplateString>[rankno]</TemplateString>
+    <Expression>(ticket, now) => ticket.rankno</Expression>
+  </NameToValueMapping>
+  <NameToValueMapping>
+    <TemplateString>[ticketPrice]</TemplateString>
+    <Expression>(ticket, now) => ticket.ticketPrice.ToString()</Expression>
+  </NameToValueMapping>
+  <NameToValueMapping>
+    <TemplateString>[payMethod]</TemplateString>
+    <Expression>(ticket, now) => ticket.payMethod</Expression>
+  </NameToValueMapping>
+</NameToValueMappingMappings>
+</PrintingNameToValueMappingConfig>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PrintConfig>
+  <!--0:T080,1:BTP6206,2:VK80-->
+  <PrintSettingConfigs>
+    <PrintSettingConfig>
+      <PrinterType>0</PrinterType>
+      <LeftMargin>50</LeftMargin>
+      <TopMargin>5</TopMargin>
+      <Scale>0.5</Scale>
+    </PrintSettingConfig>
+    <PrintSettingConfig>
+      <PrinterType>1</PrinterType>
+      <LeftMargin>425</LeftMargin>
+      <TopMargin>-20</TopMargin>
+      <Scale>0.5</Scale>
+    </PrintSettingConfig>
+    <PrintSettingConfig>
+      <PrinterType>2</PrinterType>
+      <LeftMargin>-7</LeftMargin>
+      <TopMargin>0</TopMargin>
+      <Scale>0.95</Scale>
+    </PrintSettingConfig>
+  </PrintSettingConfigs>
+</PrintConfig>

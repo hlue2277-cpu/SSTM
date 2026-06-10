@@ -1,0 +1,129 @@
+﻿<UserControl x:Class="SSTMTerminal.Views.VisitBookingPrintTicketView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" Margin="80,80,80,60">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
+        <Style x:Key="ListBoxItemTransparentSelectedStyle" TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Name="ItemBorder"
+                        SnapsToDevicePixels="true">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="ItemBorder" Property="Background" Value="Transparent"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="282" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="Auto" /><!--A title image-->
+            <RowDefinition Height="150" />
+            <RowDefinition Height="2" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="2" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0">
+            <Border.Background>
+                <ImageBrush ImageSource="/SSTMTerminal;component/Images/logo.png" Stretch="Uniform" />
+            </Border.Background>
+        </Border>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.38*" />
+                <ColumnDefinition Width="0.37*" />
+                <ColumnDefinition Width="0.25*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="自助预约" Grid.Column="0" FontSize="70" Foreground="#D2001E" FontFamily="微软雅黑"
+                       VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+            <TextBlock Text="{Binding DateAndDay}" Grid.Column="1" FontSize="30" Foreground="WhiteSmoke"
+                       FontFamily="微软雅黑" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+            <Button Grid.Column="3" Command="{Binding BackToHomeCommand}" OverridesDefaultStyle="True"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                <Button.Content>
+                    <Image Source="/SSTMTerminal;component/Images/BackRed209.png" Stretch="Uniform" />
+                </Button.Content>
+            </Button>
+        </Grid>
+
+        <GridSplitter Grid.Row="4" Height="2" BorderBrush="WhiteSmoke" IsHitTestVisible="False" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" />
+
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="256" />
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="2"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="220"/>
+                    <RowDefinition Height="140"/>
+                    <RowDefinition Height="220"/>
+                    <RowDefinition Height="140"/>
+                    <RowDefinition Height="220"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/SSTMTerminal;component/Images/VisitBookingStep1.png" Stretch="Uniform" />
+                    </Border.Background>
+                </Border>
+                <Border Grid.Row="1" Margin="0,0,0,-35">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/SSTMTerminal;component/Images/StepConnector.png" Stretch="Uniform" />
+                    </Border.Background>
+                </Border>
+                <Border Grid.Row="2">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/SSTMTerminal;component/Images/VisitBookingStep2.png" Stretch="Uniform" />
+                    </Border.Background>
+                </Border>
+                <Border Grid.Row="3" Margin="0,0,0,-35">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/SSTMTerminal;component/Images/StepConnector.png" Stretch="Uniform" />
+                    </Border.Background>
+                </Border>
+                <Border Grid.Row="4">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/SSTMTerminal;component/Images/VisitBookingStep3Chosen.png" Stretch="Uniform" />
+                    </Border.Background>
+                </Border>
+            </Grid>
+
+            <GridSplitter Grid.Column="2" Width="2" BorderBrush="WhiteSmoke" IsHitTestVisible="False" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" />
+
+            <Grid Grid.Column="4" Width="550">
+                <Border>
+                    <Border.Background>
+                        <ImageBrush ImageSource="/SSTMTerminal;component/Images/PrintBookingTicketBackground.png" Stretch="Uniform" />
+                    </Border.Background>
+                    <TextBlock Text="{Binding WaitingForPrintMessage}" FontSize="60" Foreground="Black" FontFamily="微软雅黑" VerticalAlignment="Center" />
+                </Border>
+            </Grid>
+        </Grid>
+
+        <GridSplitter Grid.Row="8" Height="2" BorderBrush="WhiteSmoke" IsHitTestVisible="False" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" />
+        <!--<Border Grid.Row="8">
+            <Border.Background>
+                <ImageBrush ImageSource="/SSTMTerminal;component/Images/BookingNotice.png" Stretch="Fill" />
+            </Border.Background>
+        </Border>-->
+    </Grid>
+</UserControl>
