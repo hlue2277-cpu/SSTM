@@ -858,7 +858,7 @@ namespace SSTMTerminal
 
         private void Login()
         {
-            TicketService.Login("admin", "abcd@1234");
+            TicketService.Login("zizhuji01", "zizhuji@01");
         }
 
         private void InitHome()

@@ -8,8 +8,8 @@
              mc:Ignorable="d" Height="1920">
     <UserControl.Resources>
 
-		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-		<!--  SimpleStyles: Button  -->
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <!--  SimpleStyles: Button  -->
 
         <Style x:Key="ticketBtnStyle" TargetType="{x:Type Button}">
             <Setter Property="SnapsToDevicePixels" Value="true" />
@@ -47,50 +47,45 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="100" />
-			<RowDefinition Height="282" />
-			<RowDefinition Height="50" />
-			<RowDefinition Height="50" /> <!--Title Image-->
-			<RowDefinition Height="50" />
-			<RowDefinition Height="Auto" />
-            <RowDefinition Height="80" />
-            <RowDefinition Height="167" />
-            <RowDefinition Height="80" />
-            <RowDefinition Height="167" />
-            <RowDefinition Height="80" />
-            <RowDefinition Height="167" />
-            <RowDefinition Height="*" />
+        <Grid.RowDefinitions>
             <RowDefinition Height="100" />
-		</Grid.RowDefinitions>
+            <RowDefinition Height="142" />
+            <RowDefinition Height="48" />
+            <RowDefinition Height="51" />
+            <!--Title Image-->
+            <RowDefinition Height="22" />
+            <RowDefinition Height="Auto" MinHeight="8" />
+            <RowDefinition Height="33" />
+            <RowDefinition Height="16" />
+            <RowDefinition Height="57" />
+            <RowDefinition Height="168" />
+            <RowDefinition Height="173" />
+            <RowDefinition Height="202" />
+            <RowDefinition />
+            <RowDefinition Height="100" />
+        </Grid.RowDefinitions>
 
-		<Border Grid.Row="1">
-			<Border.Background>
-				<SolidColorBrush Color="Transparent" />
-			</Border.Background>
-		</Border>
-
-		<!--<Border Grid.Row="3">
+        <!--<Border Grid.Row="3">
 			<Border.Background>
 				<ImageBrush ImageSource="/SSTMTerminal;component/Images/HomeTitle.png" Stretch="None"/>
 			</Border.Background>
 		</Border>-->
 
-		<Border Grid.Row="5">
-			<Image Source="{Binding NoticeImagePath}" Stretch="None" />
-		</Border>
+        <Border Grid.Row="5">
+            <Image Source="{Binding NoticeImagePath}" Stretch="None" />
+        </Border>
 
         <Button Grid.Row="7" Command="{Binding VisitBookingCommand}"
                 Style="{StaticResource ticketBtnStyle}"
-                Visibility="Collapsed">
+                Visibility="Collapsed" Height="0" Margin="256,6,256,10" Width="0">
             <Button.Content>
                 <Image Source="/SSTMTerminal;component/Images/VisitBooking.png" />
             </Button.Content>
         </Button>
 
-        <Button Grid.Row="9" Command="{Binding BuyExhibitionTicketCommand}"
+        <Button Grid.Row="8" Command="{Binding BuyExhibitionTicketCommand}"
                 Style="{StaticResource ticketBtnStyle}"
-                Visibility="{Binding ShowExhibitionButton, Converter={StaticResource BooleanToVisibilityConverter}}">
+                Visibility="{Binding ShowExhibitionButton, Converter={StaticResource BooleanToVisibilityConverter}}" Height="166" Width="512" Margin="0,52,0,7" Grid.RowSpan="2">
             <Button.Content>
                 <Image Source="/SSTMTerminal;component/Images/BuyExhibitionTicket.png" />
             </Button.Content>
@@ -98,7 +93,7 @@
 
         <Button Grid.Row="11" Command="{Binding NavigateToGetTicketHomeCommand}"
                 Style="{StaticResource ticketBtnStyle}"
-                Visibility="Collapsed">
+                Visibility="Collapsed" Height="0" Margin="256,108,256,94" Width="0">
             <Button.Content>
                 <Image Source="/SSTMTerminal;component/Images/GetTicket.png" />
             </Button.Content>
@@ -106,16 +101,16 @@
 
         <Button Grid.Row="11" Command="{Binding BuyExhibitionTicket2Command}"
                 Style="{StaticResource ticketBtnStyle}"
-                Visibility="{Binding ShowExhibition2Button, Converter={StaticResource BooleanToVisibilityConverter}}">
+                Visibility="{Binding ShowExhibition2Button, Converter={StaticResource BooleanToVisibilityConverter}}" Height="166" Width="512" Margin="0,22,0,14">
             <Button.Content>
                 <Image Source="/SSTMTerminal;component/Images/BuyExhibitionTicket2.png" />
                 <!-- 你需要准备这张图片 -->
             </Button.Content>
         </Button>
 
-        <Grid Grid.Row="13" VerticalAlignment="Center" HorizontalAlignment="Right">
-			<TextBlock HorizontalAlignment="Right" VerticalAlignment="Center"
+        <Grid Grid.Row="13" VerticalAlignment="Center" HorizontalAlignment="Right" Height="40" Margin="0,30" Width="0">
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center"
 						   FontFamily="微软雅黑" FontSize="30" Foreground="WhiteSmoke" Text="{Binding Version}" />
-		</Grid>
-	</Grid>
+        </Grid>
+    </Grid>
 </UserControl>
