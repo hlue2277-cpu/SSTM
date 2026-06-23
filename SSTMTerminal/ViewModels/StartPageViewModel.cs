@@ -1,33 +1,37 @@
-﻿using Genesis;
-using Genesis.Logging;
-using System;
+﻿using System;
 using System.Windows.Input;
-//using Prism.Regions;          // 如果还是报错，先注释掉这行试试
+using Genesis;
+using Genesis.Logging;
+// using Prism.Commands;        // 先注释掉，防止报错
+// using Prism.Regions;         // 先注释掉
 
 namespace SSTMTerminal.ViewModels
 {
     public class StartPageViewModel : ViewModelBase
     {
-        private readonly IRegionManager _regionManager;
+        // 临时使用弱引用方式，避免直接依赖 IRegionManager（先让它编译通过）
+        private readonly object _regionManager;   // 临时占位
 
         public ICommand StartBuyingCommand { get; private set; }
 
-        public StartPageViewModel(ILogger logger, IRegionManager regionManager) : base(logger)
+        public StartPageViewModel(ILogger logger) : base(logger)   // 先去掉 IRegionManager 参数
         {
-            _regionManager = regionManager;
-
-            StartBuyingCommand = new DelegateCommand(NavigateToHome);
+            StartBuyingCommand = new DelegateCommand(NavigateToHome);   // 如果还是报错，后面再改
         }
 
         private void NavigateToHome()
         {
             try
             {
-                _regionManager.RequestNavigate(RegionNames.CenterRegion, "HomeView");
+                // 临时方案：等 Loader.cs 里统一处理跳转
+                // 目前先弹窗提示，后面再改成真正跳转
+                System.Windows.MessageBox.Show("即将跳转到购票首页...", "提示");
+
+                // 后面会通过 Loader.cs 来处理跳转
             }
             catch (Exception ex)
             {
-                Logger.Log(LogLevel.Error, ex, "从启动页跳转到 Home 页面失败！", null);
+                Logger.Log(LogLevel.Error, ex, "从启动页跳转失败！", null);
             }
         }
     }
