@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="SSTMTerminal.Views.StartPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             Background="Transparent"
+             d:DesignHeight="1920" d:DesignWidth="1080">
+
+    <Grid>
+        <!-- 全屏背景（使用你已更换的 Background.png） -->
+        <Image Source="/SSTMTerminal;component/Images/Background.png" 
+               Stretch="UniformToFill" />
+
+        <!-- 主要内容容器 -->
+        <Border Background="#CC000000" CornerRadius="30" Margin="80,200,80,280">
+            <Grid>
+                <!-- 标题 -->
+                <TextBlock Text="买票自助机" 
+                           FontSize="52" FontWeight="Bold" Foreground="White"
+                           HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,60,0,0"/>
+
+                <!-- 展讯海报区域（仿照你提供的图片） -->
+                <Border Background="#FF0A3D2F" CornerRadius="20" 
+                        Margin="80,180,80,180" Padding="40">
+                    <!-- 这里可以放多行 TextBlock 模拟展讯内容，也可以直接放一张图片（推荐） -->
+                    <Image Source="/SSTMTerminal;component/Images/StartPoster.png" Stretch="Uniform" />
+                    <!-- 如果你把附件图片保存为 StartPoster.png 放在 Images 文件夹中 -->
+                </Border>
+
+                <!-- 开始购票按钮 -->
+                <Button Command="{Binding StartBuyingCommand}"
+        Width="520" Height="100"
+        Margin="0,0,0,80"
+        VerticalAlignment="Bottom"
+        HorizontalAlignment="Center"
+        Background="#FF006400"
+        Foreground="White"
+        FontSize="36"
+        FontWeight="Bold"
+        BorderThickness="0"
+        Cursor="Hand">
+                    <TextBlock Text="开始购票" />
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

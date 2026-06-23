@@ -222,6 +222,7 @@
     <Compile Include="ViewModels\ExhibitionManualAddVisitorViewModel.cs" />
     <Compile Include="ViewModels\ExhibitionPrintTicketViewModel.cs" />
     <Compile Include="ViewModels\ExhibitionPaymentCountDownViewModel.cs" />
+    <Compile Include="ViewModels\StartPageViewModel.cs" />
     <Compile Include="ViewModels\VisitBookingPrintTicketViewModel.cs" />
     <Compile Include="ViewModels\VisitBookingOrderViewModel.cs" />
     <Compile Include="ViewModels\VisitBookingManualAddVisitorViewModel.cs" />
@@ -264,6 +265,9 @@
     </Compile>
     <Compile Include="Views\ExhibitionPaymentCountDownView.xaml.cs">
       <DependentUpon>ExhibitionPaymentCountDownView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StartPageView.xaml.cs">
+      <DependentUpon>StartPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\VisitBookingPrintTicketView.xaml.cs">
       <DependentUpon>VisitBookingPrintTicketView.xaml</DependentUpon>
@@ -408,6 +412,10 @@
     <Page Include="Views\ExhibitionPaymentCountDownView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\StartPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\VisitBookingPrintTicketView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -834,6 +842,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\BuyExhibitionTicket2.png" />
+    <Resource Include="Images\StartPoster.png" />
     <Content Include="Sounds\printed.WAV">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
