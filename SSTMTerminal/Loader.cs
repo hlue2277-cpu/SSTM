@@ -118,6 +118,8 @@ namespace SSTMTerminal
             HomeView.VisitBookingCommand = new DelegateCommand<object>(OnVisitBookingCommand);
             HomeView.NavigateToGetTicketHomeCommand = new DelegateCommand<object>(OnNavigateToGetTicketHomeCommand);
             HomeView.BuyExhibitionTicketCommand = new DelegateCommand<object>(OnListExhibitionTimeSlotsCommand);
+            // 新增：特展2 Command（目前可先指向同一个逻辑，后续再区分）
+            HomeView.BuyExhibitionTicket2Command = new DelegateCommand<object>(OnListExhibitionTimeSlotsCommand);
 
             GetTicketHomeView.NoticeImagePath = Path.Combine(Environment.CurrentDirectory, "ConfigurableImages", "Notice.png");
             GetTicketHomeView.GetTicketBySwipingIDCommand = new DelegateCommand<object>(OnGetTicketBySwipingIDCommand);
