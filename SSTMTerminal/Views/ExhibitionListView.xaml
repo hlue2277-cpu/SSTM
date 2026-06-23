@@ -39,7 +39,7 @@
 
         <Border Grid.Row="0">
             <Border.Background>
-                <ImageBrush ImageSource="/SSTMTerminal;component/Images/logo.png" Stretch="Uniform" />
+                <SolidColorBrush Color="Transparent" />
             </Border.Background>
         </Border>
 
