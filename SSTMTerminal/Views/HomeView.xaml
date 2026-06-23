@@ -82,7 +82,7 @@
 
         <Button Grid.Row="7" Command="{Binding VisitBookingCommand}"
                 Style="{StaticResource ticketBtnStyle}"
-                Visibility="{Binding ShowVisitButton, Converter={StaticResource BooleanToVisibilityConverter}}">
+                Visibility="Collapsed">
             <Button.Content>
                 <Image Source="/SSTMTerminal;component/Images/VisitBooking.png" />
             </Button.Content>
@@ -98,9 +98,18 @@
 
         <Button Grid.Row="11" Command="{Binding NavigateToGetTicketHomeCommand}"
                 Style="{StaticResource ticketBtnStyle}"
-                Visibility="{Binding ShowGetTicketButton, Converter={StaticResource BooleanToVisibilityConverter}}">
+                Visibility="Collapsed">
             <Button.Content>
                 <Image Source="/SSTMTerminal;component/Images/GetTicket.png" />
+            </Button.Content>
+        </Button>
+
+        <Button Grid.Row="11" Command="{Binding BuyExhibitionTicket2Command}"
+                Style="{StaticResource ticketBtnStyle}"
+                Visibility="{Binding ShowExhibition2Button, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Button.Content>
+                <Image Source="/SSTMTerminal;component/Images/BuyExhibitionTicket2.png" />
+                <!-- 你需要准备这张图片 -->
             </Button.Content>
         </Button>
 

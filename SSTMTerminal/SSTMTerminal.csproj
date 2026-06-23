@@ -833,6 +833,7 @@
     <Resource Include="Images\WeChatPay.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\BuyExhibitionTicket2.png" />
     <Content Include="Sounds\printed.WAV">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
