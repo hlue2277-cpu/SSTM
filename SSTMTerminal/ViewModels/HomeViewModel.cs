@@ -42,8 +42,9 @@ namespace SSTMTerminal.ViewModels
             catch (Exception ex)
             {
                 ShowVisitButton = false;
-                ShowExhibitionButton = false;
-                ShowGetTicketButton = true;
+                ShowExhibitionButton = true;
+                ShowExhibition2Button = true;
+                ShowGetTicketButton = false;
                 Logger.Log(LogLevel.Error, ex, "自助取票主界面按钮配置异常！", null);
             }
         }

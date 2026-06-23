@@ -91,7 +91,7 @@
             </Button.Content>
         </Button>
 
-        <Button Grid.Row="11" Command="{Binding NavigateToGetTicketHomeCommand}"
+        <Button Grid.Row="10" Command="{Binding NavigateToGetTicketHomeCommand}"
                 Style="{StaticResource ticketBtnStyle}"
                 Visibility="Collapsed" Height="0" Margin="256,108,256,94" Width="0">
             <Button.Content>
