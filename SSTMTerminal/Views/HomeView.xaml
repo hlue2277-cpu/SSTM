@@ -19,10 +19,10 @@
                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
 
-        <!-- 两个特展卡片 -->
-        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,40,0,0">
+        <!-- 主要内容（大幅往下移动） -->
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,120,0,0">
 
-            <!-- 特展1：飞越马丘比丘 -->
+            <!-- 特展1 -->
             <Button Command="{Binding BuyExhibitionTicketCommand}"
                     Width="920" Height="280"
                     Margin="0,0,0,40"
@@ -35,13 +35,10 @@
                             BorderThickness="3" 
                             CornerRadius="25">
                         <Grid Width="900" Height="260">
-                            <!-- 左侧图片 -->
                             <Image Source="/SSTMTerminal;component/Images/Exhibition1.png" 
                                    Width="260" Height="240" 
                                    HorizontalAlignment="Left" Margin="20,10,0,10"
                                    Stretch="UniformToFill"/>
-
-                            <!-- 右侧文字 -->
                             <StackPanel Margin="310,25,40,25" HorizontalAlignment="Left">
                                 <TextBlock Text="飞越马丘比丘:" FontSize="34" FontWeight="Bold" Foreground="#1A3C34"/>
                                 <TextBlock Text="云端印加之旅" FontSize="34" FontWeight="Bold" Foreground="#1A3C34" Margin="0,4,0,12"/>
@@ -54,9 +51,10 @@
                 </Button.Content>
             </Button>
 
-            <!-- 特展2：玛雅大冒险 -->
+            <!-- 特展2 -->
             <Button Command="{Binding BuyExhibitionTicket2Command}"
                     Width="920" Height="280"
+                    Margin="0,0,0,60"
                     Background="Transparent"
                     BorderThickness="0"
                     Cursor="Hand">
@@ -66,13 +64,10 @@
                             BorderThickness="3" 
                             CornerRadius="25">
                         <Grid Width="900" Height="260">
-                            <!-- 左侧图片 -->
                             <Image Source="/SSTMTerminal;component/Images/Exhibition2.png" 
                                    Width="260" Height="240" 
                                    HorizontalAlignment="Left" Margin="20,10,0,10"
                                    Stretch="UniformToFill"/>
-
-                            <!-- 右侧文字 -->
                             <StackPanel Margin="310,25,40,25" HorizontalAlignment="Left">
                                 <TextBlock Text="玛雅大冒险:" FontSize="34" FontWeight="Bold" Foreground="#1A3C34"/>
                                 <TextBlock Text="VR新探索" FontSize="34" FontWeight="Bold" Foreground="#1A3C34" Margin="0,4,0,12"/>
@@ -82,6 +77,23 @@
                             </StackPanel>
                         </Grid>
                     </Border>
+                </Button.Content>
+            </Button>
+
+            <!-- 返回按钮（放在最下方，仿照图片风格） -->
+            <Button Command="{Binding BackToStartPageCommand}"
+                    Width="380" Height="90"
+                    Background="#1A3C34"
+                    Foreground="White"
+                    FontSize="26"
+                    FontWeight="Bold"
+                    BorderThickness="0"
+                    Cursor="Hand"
+                    Margin="0,40,0,80">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="← 返回" Margin="0,0,10,0"/>
+                    </StackPanel>
                 </Button.Content>
             </Button>
 

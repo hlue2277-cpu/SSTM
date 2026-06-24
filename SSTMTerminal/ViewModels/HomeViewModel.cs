@@ -13,6 +13,8 @@ namespace SSTMTerminal.ViewModels
         
         ICommand NavigateToGetTicketHomeCommand { get; set; }
         ICommand VisitBookingCommand { get; set; }
+        // 新增：返回启动页命令
+        ICommand BackToStartPageCommand { get; set; }
         string Version { get; set; }
         string NoticeImagePath { get; set; }
         bool ShowVisitButton { get; set; }
@@ -29,6 +31,8 @@ namespace SSTMTerminal.ViewModels
 
         public ICommand NavigateToGetTicketHomeCommand { get; set; }
         public ICommand VisitBookingCommand { get; set; }
+        // 新增
+        public ICommand BackToStartPageCommand { get; set; }
 
         public HomeViewModel(ILogger logger) : base(logger)
         {

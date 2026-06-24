@@ -133,6 +133,9 @@ namespace SSTMTerminal
             // 新增：特展2 Command（目前可先指向同一个逻辑，后续再区分）
             HomeView.BuyExhibitionTicket2Command = new DelegateCommand<object>(OnListExhibitionTimeSlotsCommand);
 
+            // 新增：返回启动页
+            HomeView.BackToStartPageCommand = new DelegateCommand<object>(OnBackToStartPageCommand);   // 或者新建方法也行
+
             StartPageView.StartBuyingCommand=new DelegateCommand<object>(OnBackToHomeCommand);
 
             GetTicketHomeView.NoticeImagePath = Path.Combine(Environment.CurrentDirectory, "ConfigurableImages", "Notice.png");
@@ -739,6 +742,11 @@ namespace SSTMTerminal
         private void OnBackToHomeCommand(object obj)
         {
             BackToHome();
+        }
+
+        private void OnBackToStartPageCommand(object obj)
+        {
+            AttachOnlyView(RegionNames.HomeRegion, StartPageView);
         }
 
         private void BackToHome()
