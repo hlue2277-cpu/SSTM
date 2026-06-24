@@ -10,7 +10,7 @@ namespace SSTMTerminal.ViewModels
         ICommand StartBuyingCommand { get; }
     }
 
-    public class StartPageViewModel : ViewModelBase
+    public class StartPageViewModel : ViewModelBase, IStartPageViewModel
     {
         public ICommand StartBuyingCommand { get; private set; }
 

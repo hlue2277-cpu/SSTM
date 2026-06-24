@@ -98,6 +98,10 @@ namespace SSTMTerminal
 
             // 新增启动页
             StartPageView = Container.Resolve<IStartPageViewModel>();
+            //// ==================== 新增：启动页注册 ====================
+            //Container.RegisterType<IStartPageViewModel, StartPageViewModel>(new ContainerControlledLifetimeManager());
+
+            //StartPageView = Container.Resolve<IStartPageViewModel>();
 
 
             HomeView = Container.Resolve<IHomeViewModel>();
