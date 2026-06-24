@@ -7,16 +7,16 @@ namespace SSTMTerminal.ViewModels
 {
     public interface IStartPageViewModel : IViewModel
     {
-        ICommand StartBuyingCommand { get; }
+        ICommand StartBuyingCommand { get; set; }
     }
 
     public class StartPageViewModel : ViewModelBase, IStartPageViewModel
     {
-        public ICommand StartBuyingCommand { get; private set; }
+        public ICommand StartBuyingCommand { get; set; }
 
         public StartPageViewModel(ILogger logger) : base(logger)
         {
-            StartBuyingCommand = new SimpleCommand(NavigateToHome);   // 使用简单实现
+            //StartBuyingCommand = new SimpleCommand(NavigateToHome);   // 使用简单实现
         }
 
         private void NavigateToHome()
