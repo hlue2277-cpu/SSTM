@@ -46,6 +46,10 @@ namespace SSTMTerminal
         #region Views
 
         public IHomeViewModel HomeView { get; set; }
+
+        // 新增：启动页
+        public IStartPageViewModel StartPageView { get; set; }
+
         public IGetTicketHomeViewModel GetTicketHomeView { get; set; }
         public IMsgViewModel MsgView { get; set; }
         public IPrintingViewModel PrintingView { get; set; }
@@ -91,6 +95,10 @@ namespace SSTMTerminal
 
             TicketService = Container.Resolve<ITicketService>();
             NotifyInfoDao = Container.Resolve<TicketNotifyInfoDao>();
+
+            // 新增启动页
+            StartPageView = Container.Resolve<IStartPageViewModel>();
+
 
             HomeView = Container.Resolve<IHomeViewModel>();
             GetTicketHomeView = Container.Resolve<IGetTicketHomeViewModel>();
@@ -865,7 +873,9 @@ namespace SSTMTerminal
 
         private void InitHome()
         {
-            AttachOnlyView(RegionNames.HomeRegion, HomeView);
+            //AttachOnlyView(RegionNames.HomeRegion, HomeView);
+            // 启动时先显示新启动页
+            AttachOnlyView(RegionNames.CenterRegion, StartPageView);
 
             renotifyServerTimer.Enabled = true;
 
