@@ -19,20 +19,20 @@ namespace SSTMTerminal.ViewModels
             //StartBuyingCommand = new SimpleCommand(NavigateToHome);   // 使用简单实现
         }
 
-        private void NavigateToHome()
-        {
-            System.Windows.MessageBox.Show("开始购票\n\n即将进入购票首页...", "提示");
-        }
+        //private void NavigateToHome()
+        //{
+        //    System.Windows.MessageBox.Show("开始购票\n\n即将进入购票首页...", "提示");
+        //}
     }
 
-    // 简单命令实现（放在同一个文件底部）
-    public class SimpleCommand : ICommand
-    {
-        private readonly Action _execute;
-        public SimpleCommand(Action execute) => _execute = execute;
+    //// 简单命令实现（放在同一个文件底部）
+    //public class SimpleCommand : ICommand
+    //{
+    //    private readonly Action _execute;
+    //    public SimpleCommand(Action execute) => _execute = execute;
 
-        public event EventHandler CanExecuteChanged;
-        public bool CanExecute(object parameter) => true;
-        public void Execute(object parameter) => _execute?.Invoke();
-    }
+    //    public event EventHandler CanExecuteChanged;
+    //    public bool CanExecute(object parameter) => true;
+    //    public void Execute(object parameter) => _execute?.Invoke();
+    //}
 }
