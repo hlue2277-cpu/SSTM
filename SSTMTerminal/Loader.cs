@@ -131,7 +131,7 @@ namespace SSTMTerminal
             HomeView.NavigateToGetTicketHomeCommand = new DelegateCommand<object>(OnNavigateToGetTicketHomeCommand);
             HomeView.BuyExhibitionTicketCommand = new DelegateCommand<object>(OnListExhibitionTimeSlotsCommand);
             // 新增：特展2 Command（目前可先指向同一个逻辑，后续再区分）
-            HomeView.BuyExhibitionTicket2Command = new DelegateCommand<object>(OnListExhibitionTimeSlotsCommand);
+            HomeView.BuyExhibitionTicket2Command = new DelegateCommand<object>(OnListExhibition2TimeSlotsCommand);
 
             // 新增：返回启动页
             HomeView.BackToStartPageCommand = new DelegateCommand<object>(OnBackToStartPageCommand);   // 或者新建方法也行
@@ -234,7 +234,34 @@ namespace SSTMTerminal
         {
             AttachOnlyView(RegionNames.HomeRegion, ExhibitionTicketTimeSlotsView);
 
-            var timeSlots = GetExhibitionTimeSlots();
+            var timeSlots = GetExhibitionTimeSlots("4");
+            if (timeSlots != null)
+            {
+                ExhibitionTicketTimeSlotsView.SetTimeSlots(timeSlots);
+            }
+            else
+            {
+                // TEST code.
+                // Ticket Service to query the time slots
+                var mockedTimeSlots = new TimeSlotsModel();
+                var item1 = new SlotItem();
+                item1.DisplayName = "未能获取场次";
+                item1.TimeRange = "00:00-00:00";
+                item1.IsAvailable = false;
+                item1.ScheduleId = 19;
+                item1.ReservePeriodId = 1271;
+                mockedTimeSlots.Slots.Add(item1);
+
+                ExhibitionTicketTimeSlotsView.SetTimeSlots(mockedTimeSlots);
+            }
+        }
+
+        //2026.6.25
+        private void OnListExhibition2TimeSlotsCommand(object obj)
+        {
+            AttachOnlyView(RegionNames.HomeRegion, ExhibitionTicketTimeSlotsView);
+
+            var timeSlots = GetExhibitionTimeSlots("5");
             if (timeSlots != null)
             {
                 ExhibitionTicketTimeSlotsView.SetTimeSlots(timeSlots);
@@ -604,6 +631,15 @@ namespace SSTMTerminal
             ExhibitionOrderView.Reset();
             ExhibitionTicketTimeSlotsView.Reset();
             OnListExhibitionTimeSlotsCommand(null);
+        }
+
+        private void OnBackToExhibition2TicketTimeSlotsCommand(object obj)
+        {
+            ResetIDCardReader();
+            MsgView.Reset();
+            ExhibitionOrderView.Reset();
+            ExhibitionTicketTimeSlotsView.Reset();
+            OnListExhibition2TimeSlotsCommand(null);
         }
 
         private void OnExhibitionManualAddVisitorCommand()
@@ -1265,7 +1301,7 @@ namespace SSTMTerminal
             return null;
         }
 
-        private TimeSlotsModel GetExhibitionTimeSlots()
+        private TimeSlotsModel GetExhibitionTimeSlots(string sTargType)
         {
             var slotList = TicketService.GetSlotList("visitor", DateTime.Today.ToString("yyyy-MM-dd"), "Y");
             if (slotList != null && slotList.data?.reservePeriodList?.Count > 0)
@@ -1273,7 +1309,7 @@ namespace SSTMTerminal
                 var slotDetailList = new List<ReserveSlotDetailResponse>();
                 foreach (var period in slotList.data?.reservePeriodList)
                 {
-                    if (period.type == "4")//2026.6.25
+                    if (period.type == sTargType)//2026.6.25
                     {
                         var slotDetailResponse = TicketService.GetSlotDetail(period.id);
                         if (slotDetailResponse != null)
