@@ -18,10 +18,10 @@ namespace SSTMTerminal.Views
 
         private void OnExhibitionTicketTimeSlotSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(this.DataContext != null && this.DataContext is ExhibitionTicketTimeSlotsViewModel vm)
-            {
-                vm.SelectExhibitionTicketTimeSlotCommand.Execute(ExhibitionTicketTimeSlotListBox.SelectedItem);
-            }
+            //if(this.DataContext != null && this.DataContext is ExhibitionTicketTimeSlotsViewModel vm)
+            //{
+            //    vm.SelectExhibitionTicketTimeSlotCommand.Execute(ExhibitionTicketTimeSlotListBox.SelectedItem);  
+            //}
         }
     }
 }

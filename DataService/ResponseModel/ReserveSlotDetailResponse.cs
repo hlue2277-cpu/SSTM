@@ -40,5 +40,8 @@ namespace DataService
         public int usedNum4Other { get; set; }
         public int usedNum4Teamterm { get; set; }
         public int usedNum4Membership { get; set; }
+
+        //2026.6.25
+        public string sessionName { get; set; }
     }
 }

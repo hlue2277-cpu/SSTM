@@ -245,20 +245,12 @@ namespace SSTMTerminal
                 // Ticket Service to query the time slots
                 var mockedTimeSlots = new TimeSlotsModel();
                 var item1 = new SlotItem();
-                item1.DisplayName = "09:00-10:00 测试 (余票10张)";
-                item1.TimeRange = "09:00-10:00";
-                item1.IsAvailable = true;
+                item1.DisplayName = "未能获取场次";
+                item1.TimeRange = "00:00-00:00";
+                item1.IsAvailable = false;
                 item1.ScheduleId = 19;
                 item1.ReservePeriodId = 1271;
-                var item2 = new SlotItem();
-                item2.DisplayName = "14:00-15:00 测试 (余票10张)";
-                item2.TimeRange = "14:00-15:00";
-                item2.IsAvailable = false;
-                item2.ScheduleId = 19;
-                item2.ReservePeriodId = 1271;
-                item2.TimeSlotImagePath = ImagePath.ItemRectangleDisabled;
                 mockedTimeSlots.Slots.Add(item1);
-                mockedTimeSlots.Slots.Add(item2);
 
                 ExhibitionTicketTimeSlotsView.SetTimeSlots(mockedTimeSlots);
             }
@@ -1281,10 +1273,13 @@ namespace SSTMTerminal
                 var slotDetailList = new List<ReserveSlotDetailResponse>();
                 foreach (var period in slotList.data?.reservePeriodList)
                 {
-                    var slotDetailResponse = TicketService.GetSlotDetail(period.id);
-                    if (slotDetailResponse != null)
+                    if (period.type == "4")//2026.6.25
                     {
-                        slotDetailList.Add(slotDetailResponse);
+                        var slotDetailResponse = TicketService.GetSlotDetail(period.id);
+                        if (slotDetailResponse != null)
+                        {
+                            slotDetailList.Add(slotDetailResponse);
+                        }
                     }
                 }
 
@@ -1320,99 +1315,149 @@ namespace SSTMTerminal
             return null;
         }
 
+        //private SlotItem PopulateSlotItem(ReserveSlotDetailResponse slot, int? scheduleId, string payMethod, bool needToCheckTickStock)
+        //{
+        //    var slotItem = new SlotItem();
+        //    slotItem.PayMethod = payMethod;
+        //    slotItem.ReservePeriodId = slot.data.reservePeriod.id;
+        //    if (scheduleId.HasValue)
+        //    {
+        //        slotItem.ScheduleId = scheduleId.Value;
+        //    }
+
+        //    string slotTimeStartString = string.Empty;
+        //    // "starttime": "2024-03-31 09:00:00"
+        //    if (!string.IsNullOrEmpty(slot.data.reservePeriod.starttime))
+        //    {
+        //        var starttimeString = JsonHelper.ConvertToDateTime(slot.data.reservePeriod.starttime);
+        //        Logger.Information($"转换时间：{slot.data.reservePeriod.starttime} to {starttimeString}");
+        //        var startTimeArray = starttimeString.Split(' ');
+        //        if (startTimeArray != null && startTimeArray.Length == 2)
+        //        {
+        //            slotTimeStartString = startTimeArray[1];
+        //        }
+        //    }
+        //    string slotTimeEndString = string.Empty;
+        //    DateTime slotTimeEnd = DateTime.Now;
+        //    // "endtime": "2024-03-31 10:00:00"
+        //    if (!string.IsNullOrEmpty(slot.data.reservePeriod.endtime))
+        //    {
+        //        var endtimeString = JsonHelper.ConvertToDateTime(slot.data.reservePeriod.endtime);
+        //        Logger.Information($"转换时间：{slot.data.reservePeriod.endtime} to {endtimeString}");
+        //        // use to compare whether the time is passed.
+        //        if (!DateTime.TryParse(endtimeString, out slotTimeEnd))
+        //        {
+        //            Logger.Error($"转换预约时间段的结束时间错误。结束时间：{slot.data.reservePeriod.endtime}");
+        //        }
+        //        var endTimeArray = endtimeString.Split(' ');
+        //        if (endTimeArray != null && endTimeArray.Length == 2)
+        //        {
+        //            slotTimeEndString = endTimeArray[1];
+        //        }
+        //    }
+
+        //    if (string.IsNullOrEmpty(slotTimeStartString) || string.IsNullOrEmpty(slotTimeEndString))
+        //    {
+        //        Logger.Error($"解析预约时间段错误。起始时间：{slot?.data?.reservePeriod?.starttime}，结束时间：{slot?.data?.reservePeriod?.endtime}");
+        //    }
+
+        //    var now = DateTime.Now;
+        //    if (now >= slotTimeEnd)
+        //    {
+        //        slotItem.DisplayName = $"{slotTimeStartString}-{slotTimeEndString} (该时段已过)";
+        //        slotItem.TimeRange = $"{slotTimeStartString}-{slotTimeEndString}";
+        //        slotItem.IsAvailable = false;
+        //        slotItem.TimeSlotImagePath = ImagePath.ItemRectangleDisabled;
+        //    }
+        //    else
+        //    {
+        //        var leftCount = slot.data.reservePeriod.visitorsnum - slot.data.reservePeriod.usedNum4Other;
+        //        if (leftCount <= 0)
+        //        {
+        //            if (needToCheckTickStock)
+        //            {
+        //                slotItem.DisplayName = $"{slotTimeStartString}-{slotTimeEndString} (已约满)";
+        //                slotItem.IsAvailable = false;
+        //                slotItem.TimeSlotImagePath = ImagePath.ItemRectangleDisabled;
+        //            }
+        //            else
+        //            {
+        //                slotItem.DisplayName = $"{slotTimeStartString}-{slotTimeEndString}";
+        //                slotItem.IsAvailable = true;
+        //                slotItem.TimeSlotImagePath = ImagePath.ItemRectangle;
+        //            }
+        //            slotItem.TimeRange = $"{slotTimeStartString}-{slotTimeEndString}";
+        //        }
+        //        else
+        //        {
+        //            if (needToCheckTickStock)
+        //            {
+        //                slotItem.DisplayName = $"{slotTimeStartString}-{slotTimeEndString} (余票{leftCount}张)";
+        //            }
+        //            else
+        //            {
+        //                slotItem.DisplayName = $"{slotTimeStartString}-{slotTimeEndString}";
+        //            }
+
+        //            slotItem.TimeRange = $"{slotTimeStartString}-{slotTimeEndString}";
+        //            slotItem.IsAvailable = true;
+        //            slotItem.TimeSlotImagePath = ImagePath.ItemRectangle;
+        //        }
+        //    }
+        //    return slotItem;
+        //}
+
         private SlotItem PopulateSlotItem(ReserveSlotDetailResponse slot, int? scheduleId, string payMethod, bool needToCheckTickStock)
         {
             var slotItem = new SlotItem();
             slotItem.PayMethod = payMethod;
             slotItem.ReservePeriodId = slot.data.reservePeriod.id;
-            if (scheduleId.HasValue)
-            {
-                slotItem.ScheduleId = scheduleId.Value;
-            }
 
-            string slotTimeStartString = string.Empty;
-            // "starttime": "2024-03-31 09:00:00"
+            if (scheduleId.HasValue)
+                slotItem.ScheduleId = scheduleId.Value;
+
+            // ==================== 时间处理 ====================
+            string startTimeStr = "";
+            string endTimeStr = "";
+
             if (!string.IsNullOrEmpty(slot.data.reservePeriod.starttime))
             {
-                var starttimeString = JsonHelper.ConvertToDateTime(slot.data.reservePeriod.starttime);
-                Logger.Information($"转换时间：{slot.data.reservePeriod.starttime} to {starttimeString}");
-                var startTimeArray = starttimeString.Split(' ');
-                if (startTimeArray != null && startTimeArray.Length == 2)
-                {
-                    slotTimeStartString = startTimeArray[1];
-                }
+                var start = Convert.ToDateTime(JsonHelper.ConvertToDateTime(slot.data.reservePeriod.starttime));
+                startTimeStr = start.ToString("HH:mm");
             }
-            string slotTimeEndString = string.Empty;
-            DateTime slotTimeEnd = DateTime.Now;
-            // "endtime": "2024-03-31 10:00:00"
+
             if (!string.IsNullOrEmpty(slot.data.reservePeriod.endtime))
             {
-                var endtimeString = JsonHelper.ConvertToDateTime(slot.data.reservePeriod.endtime);
-                Logger.Information($"转换时间：{slot.data.reservePeriod.endtime} to {endtimeString}");
-                // use to compare whether the time is passed.
-                if (!DateTime.TryParse(endtimeString, out slotTimeEnd))
-                {
-                    Logger.Error($"转换预约时间段的结束时间错误。结束时间：{slot.data.reservePeriod.endtime}");
-                }
-                var endTimeArray = endtimeString.Split(' ');
-                if (endTimeArray != null && endTimeArray.Length == 2)
-                {
-                    slotTimeEndString = endTimeArray[1];
-                }
+                var end = Convert.ToDateTime(JsonHelper.ConvertToDateTime(slot.data.reservePeriod.endtime));
+                endTimeStr = end.ToString("HH:mm");
             }
 
-            if (string.IsNullOrEmpty(slotTimeStartString) || string.IsNullOrEmpty(slotTimeEndString))
+            slotItem.TimeRange = $"{startTimeStr}-{endTimeStr}";
+            slotItem.DisplayName = $"{startTimeStr}-{endTimeStr}";
+
+            // 显示展厅名称（非常重要！）
+            if (!string.IsNullOrEmpty(slot.data.reservePeriod.sessionName))
             {
-                Logger.Error($"解析预约时间段错误。起始时间：{slot?.data?.reservePeriod?.starttime}，结束时间：{slot?.data?.reservePeriod?.endtime}");
+                slotItem.DisplayName = slot.data.reservePeriod.sessionName + " " + slotItem.DisplayName;
             }
 
-            var now = DateTime.Now;
-            if (now >= slotTimeEnd)
-            {
-                slotItem.DisplayName = $"{slotTimeStartString}-{slotTimeEndString} (该时段已过)";
-                slotItem.TimeRange = $"{slotTimeStartString}-{slotTimeEndString}";
-                slotItem.IsAvailable = false;
-                slotItem.TimeSlotImagePath = ImagePath.ItemRectangleDisabled;
-            }
-            else
-            {
-                var leftCount = slot.data.reservePeriod.visitorsnum - slot.data.reservePeriod.usedNum4Other;
-                if (leftCount <= 0)
-                {
-                    if (needToCheckTickStock)
-                    {
-                        slotItem.DisplayName = $"{slotTimeStartString}-{slotTimeEndString} (已约满)";
-                        slotItem.IsAvailable = false;
-                        slotItem.TimeSlotImagePath = ImagePath.ItemRectangleDisabled;
-                    }
-                    else
-                    {
-                        slotItem.DisplayName = $"{slotTimeStartString}-{slotTimeEndString}";
-                        slotItem.IsAvailable = true;
-                        slotItem.TimeSlotImagePath = ImagePath.ItemRectangle;
-                    }
-                    slotItem.TimeRange = $"{slotTimeStartString}-{slotTimeEndString}";
-                }
-                else
-                {
-                    if (needToCheckTickStock)
-                    {
-                        slotItem.DisplayName = $"{slotTimeStartString}-{slotTimeEndString} (余票{leftCount}张)";
-                    }
-                    else
-                    {
-                        slotItem.DisplayName = $"{slotTimeStartString}-{slotTimeEndString}";
-                    }
+            // ==================== 剩余票数 ====================
+            int total = slot.data.reservePeriod.visitorsnum;
+            int used = slot.data.reservePeriod.usedNum4Other;
+            int remaining = total - used;
 
-                    slotItem.TimeRange = $"{slotTimeStartString}-{slotTimeEndString}";
-                    slotItem.IsAvailable = true;
-                    slotItem.TimeSlotImagePath = ImagePath.ItemRectangle;
-                }
-            }
+            slotItem.RemainingTickets = remaining > 0 ? remaining : 0;
+
+            // 是否可用
+            bool isAvailable = slot.data.reservePeriod.status == "Y" && remaining > 0;
+
+            slotItem.IsAvailable = isAvailable;
+            slotItem.TimeSlotImagePath = isAvailable ? ImagePath.ItemRectangle : ImagePath.ItemRectangleDisabled;
+
             return slotItem;
         }
 
-        
+
         private ExhibitionTicketTypesModel GetTicketTypes(int reservePeriodId, string ticketTimeRange)
         {
             var ticketTypeList = TicketService.GetTicketTypes(reservePeriodId);

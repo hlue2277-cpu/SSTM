@@ -36,5 +36,7 @@ namespace DataService
         public int userGroupId { get; set; }
         public string isDedicated { get; set; }
 
+        //2026.6.25
+        public string type { get; set; }
     }
 }

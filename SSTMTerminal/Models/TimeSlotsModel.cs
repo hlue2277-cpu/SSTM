@@ -35,5 +35,11 @@ namespace SSTMTerminal.Models
         public int ScheduleId { get; set; }
         public int ReservePeriodId { get; set; }
         public string PayMethod { get; set; }
+
+        //2026.6.25
+        public string type { get; set; }
+        public string sessionName { get; set; }     // 展厅名称
+        public int RemainingTickets { get; set; }   // 剩余票数
+        public string ShowTime { get; set; }        // 开演时间（可选）
     }
 }

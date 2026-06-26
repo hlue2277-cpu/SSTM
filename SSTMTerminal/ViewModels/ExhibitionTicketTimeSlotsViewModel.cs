@@ -43,6 +43,21 @@ namespace SSTMTerminal.ViewModels
             }
         }
 
+        //public void SetTimeSlots(TimeSlotsModel exhibitionTicketTimeSlotsModel)
+        //{
+        //    TimeSlots.Clear();
+        //    if (exhibitionTicketTimeSlotsModel?.Slots == null) return;
+
+        //    foreach (var item in exhibitionTicketTimeSlotsModel.Slots)
+        //    {
+        //        // 只显示特展相关（根据你的业务调整条件）
+        //        if (item.type == "4" || item.type == "5" || item.sessionName.Contains("马丘比丘") || item.sessionName.Contains("玛雅"))
+        //        {
+        //            TimeSlots.Add(item);
+        //        }
+        //    }
+        //}
+
         private ObservableCollection<SlotItem> timeSlots = new ObservableCollection<SlotItem>();
         public ObservableCollection<SlotItem> TimeSlots
         {
