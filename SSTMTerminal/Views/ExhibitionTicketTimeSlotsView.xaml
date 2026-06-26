@@ -18,12 +18,7 @@
 
         <!-- 顶部标题栏 -->
         <Grid Grid.Row="0" Margin="0,0,0,40">
-            <Button Command="{Binding BackToHomeCommand}" 
-                    Width="80" Height="80"
-                    HorizontalAlignment="Left" VerticalAlignment="Center"
-                    Background="Transparent" BorderThickness="0" Cursor="Hand">
-                <TextBlock Text="←" FontSize="48" Foreground="#1A3C34" FontWeight="Bold"/>
-            </Button>
+            
 
             <TextBlock Text="请选择参观时段" 
                        FontSize="42" FontWeight="Bold" Foreground="#1A3C34"
@@ -88,32 +83,22 @@
         </ScrollViewer>
 
         <!-- 底部按钮 -->
-        <Grid Grid.Row="2" Margin="0,30,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
+        <!-- 底部按钮 -->
+        <Grid Grid.Row="2" Margin="0,40,0,0">
             <Button Command="{Binding BackToHomeCommand}"
-                    Width="340" Height="88"
-                    Margin="0,0,40,0"
-                    Background="#F5F5F5"
-                    Foreground="#1A3C34"
-                    FontSize="26"
-                    FontWeight="Medium"
-                    BorderBrush="#CCCCCC"
-                    BorderThickness="2">
-                返回
-            </Button>
-
-            <Button Command="{Binding SelectExhibitionTicketTimeSlotCommand}"
-                    Width="340" Height="88"
+                    Width="380" Height="92"
                     Background="#1A3C34"
                     Foreground="White"
-                    FontSize="26"
+                    FontSize="28"
                     FontWeight="Medium"
-                    BorderThickness="0">
-                下一步
+                    BorderThickness="0"
+                    Cursor="Hand"
+                    HorizontalAlignment="Center">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="← 返回" Margin="0,0,12,0"/>
+                    </StackPanel>
+                </Button.Content>
             </Button>
         </Grid>
     </Grid>
