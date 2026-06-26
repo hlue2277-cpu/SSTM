@@ -3,313 +3,156 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" Margin="80,80,80,60">
-    <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
-        <Style x:Key="ListBoxItemTransparentSelectedStyle" TargetType="ListBoxItem">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListBoxItem">
-                        <Border Name="ItemBorder"
-                        SnapsToDevicePixels="true">
-                            <ContentPresenter />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsSelected" Value="true">
-                                <Setter TargetName="ItemBorder" Property="Background" Value="Transparent"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </UserControl.Resources>
-    <Grid>
+             mc:Ignorable="d" Margin="60,40,60,40">
+
+    <Grid Background="Transparent">
         <Grid.RowDefinitions>
-            <RowDefinition Height="282" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="Auto" /><!--A title image-->
-            <RowDefinition Height="150" />
-            <RowDefinition Height="2" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="2" />
-            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto"/>
+            <!-- 标题 -->
+            <RowDefinition Height="Auto"/>
+            <!-- 订单信息 -->
+            <RowDefinition Height="Auto"/>
+            <!-- 实名认证标题 -->
+            <RowDefinition Height="Auto"/>
+            <!-- 认证方式按钮 -->
+            <RowDefinition Height="Auto"/>
+            <!-- 游客列表标题 -->
+            <RowDefinition Height="*"/>
+            <!-- 游客列表 -->
+            <RowDefinition Height="Auto"/>
+            <!-- 底部按钮 -->
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0">
-            <Border.Background>
-                <SolidColorBrush Color="Transparent" />
-            </Border.Background>
+        <!-- 顶部标题栏 -->
+        <Grid Grid.Row="0" Margin="0,0,0,20">
+            <Button Command="{Binding BackToHomeCommand}" 
+                    Width="80" Height="80"
+                    HorizontalAlignment="Left" VerticalAlignment="Center"
+                    Background="Transparent" BorderThickness="0" Cursor="Hand">
+                <TextBlock Text="←" FontSize="48" Foreground="#1A3C34" FontWeight="Bold"/>
+            </Button>
+
+            <TextBlock Text="实名认证" 
+                       FontSize="42" FontWeight="Bold" Foreground="#1A3C34"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- 订单信息卡片 -->
+        <Border Grid.Row="1" Background="White" CornerRadius="20" BorderBrush="#E5E5E5" BorderThickness="2" Padding="35,25" Margin="0,0,0,30">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding ExhibitionTicketType}" FontSize="28" FontWeight="Medium" Foreground="#1A3C34"/>
+                    <TextBlock Text="{Binding ExhibitionTicketPrice}" FontSize="32" FontWeight="Bold" Foreground="#D2001E" Grid.Column="1" HorizontalAlignment="Right"/>
+                </Grid>
+                <TextBlock Text="{Binding DateTime}" FontSize="19" Foreground="#666" Margin="0,12,0,8"/>
+                <TextBlock Text="{Binding VisitorCountString}" FontSize="19" Foreground="#666"/>
+            </StackPanel>
         </Border>
 
-        <Grid Grid.Row="3">
+        <!-- 实名认证标题 -->
+        <TextBlock Grid.Row="2" Text="请选择实名认证方式" 
+                   FontSize="28" FontWeight="Medium" Foreground="#1A3C34" Margin="0,0,0,20"/>
+
+        <!-- 认证方式按钮（三列） -->
+        <UniformGrid Grid.Row="3" Columns="3" Margin="0,0,0,40" HorizontalAlignment="Center">
+
+            <!-- 刷身份证 -->
+            <Button Command="{Binding SwipAddVisitorCommand}" Margin="10" Background="Transparent" BorderThickness="0" Cursor="Hand">
+                <Border Background="White" CornerRadius="18" BorderBrush="#E5E5E5" BorderThickness="2" Padding="15">
+                    <StackPanel>
+                        <Image Source="/SSTMTerminal;component/Images/IDCard.png" Width="160" Height="160" Margin="0,10"/>
+                        <TextBlock Text="刷身份证" FontSize="20" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                        <TextBlock Text="Swipe ID card" FontSize="14" Foreground="#666" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Button>
+
+            <!-- 手工输入 -->
+            <Button Command="{Binding ManualAddVisitorCommand}" Margin="10" Background="Transparent" BorderThickness="0" Cursor="Hand">
+                <Border Background="White" CornerRadius="18" BorderBrush="#E5E5E5" BorderThickness="2" Padding="15">
+                    <StackPanel>
+                        <Image Source="/SSTMTerminal;component/Images/ManualInput.png" Width="160" Height="160" Margin="0,10"/>
+                        <TextBlock Text="手工输入" FontSize="20" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                        <TextBlock Text="Manual Input" FontSize="14" Foreground="#666" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Button>
+
+            <!-- 外国人永居证 -->
+            <Button Command="{Binding SwipAddForeignerVisitorCommand}" Margin="10" Background="Transparent" BorderThickness="0" Cursor="Hand">
+                <Border Background="White" CornerRadius="18" BorderBrush="#E5E5E5" BorderThickness="2" Padding="15">
+                    <StackPanel>
+                        <Image Source="/SSTMTerminal;component/Images/ForeignID.png" Width="160" Height="160" Margin="0,10"/>
+                        <TextBlock Text="外国人永居证" FontSize="20" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                        <TextBlock Text="Permanent Residence" FontSize="14" Foreground="#666" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Button>
+        </UniformGrid>
+
+        <!-- 游客列表标题 -->
+        <TextBlock Grid.Row="4" Text="已添加游客" FontSize="28" FontWeight="Medium" Foreground="#1A3C34" Margin="0,0,0,15"/>
+
+        <!-- 游客列表（保留原有功能） -->
+        <ListBox Grid.Row="5" x:Name="VisitorListBox"
+                 ItemsSource="{Binding Visitors}"
+                 BorderBrush="Transparent"
+                 Background="Transparent"
+                 HorizontalAlignment="Stretch"
+                 ItemContainerStyle="{DynamicResource ListBoxItemTransparentSelectedStyle}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Width="920" Height="87" Margin="0,0,0,15" Background="White" CornerRadius="12" BorderBrush="#E5E5E5" BorderThickness="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding ID}" 
+                                       HorizontalAlignment="Left" VerticalAlignment="Center"
+                                       FontSize="32" Margin="30,0,0,0" Foreground="#1A3C34"/>
+                            <Button Grid.Column="1" Width="60" Height="60" Margin="0,0,20,0"
+                                    Command="{Binding DataContext.DeleteVisitorCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}}"
+                                    CommandParameter="{Binding}"
+                                    Background="Transparent" BorderThickness="0">
+                                <Image Source="/SSTMTerminal;component/Images/Clear.png" Width="40"/>
+                            </Button>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!-- 底部按钮 -->
+        <Grid Grid.Row="6" Margin="0,40,0,40">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.38*" />
-                <ColumnDefinition Width="0.37*" />
-                <ColumnDefinition Width="0.25*" />
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="特展购票" Grid.Column="0" FontSize="70" Foreground="#D2001E" FontFamily="微软雅黑"
-                       VerticalAlignment="Bottom" HorizontalAlignment="Left" />
-            <TextBlock Text="{Binding DateAndDay}" Grid.Column="1" FontSize="30" Foreground="WhiteSmoke"
-                       FontFamily="微软雅黑" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-            <Button Grid.Column="3" Command="{Binding BackToHomeCommand}" OverridesDefaultStyle="True"
-                    VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                <Button.Content>
-                    <Image Source="/SSTMTerminal;component/Images/BackRed209.png" Stretch="Uniform" />
-                </Button.Content>
+
+            <!-- 确认按钮（彻底去除白色背景 + 文字居中） -->
+            <Button Command="{Binding PayForTicketsCommand}"
+                    Width="340" Height="88"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    IsEnabled="{Binding IsPayForTicketsEnabled}"
+                    HorizontalAlignment="Center">
+                <Border Background="#1A3C34"
+                        CornerRadius="15"
+                        Padding="0"
+                        Width="340" Height="88">
+                    <TextBlock Text="确认"
+                               FontSize="32"
+                               FontWeight="Medium"
+                               Foreground="White"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Border>
             </Button>
         </Grid>
-
-        <GridSplitter Grid.Row="4" Height="2" BorderBrush="WhiteSmoke" IsHitTestVisible="False" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" />
-
-        <Grid Grid.Row="6">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="256" />
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="2"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="180"/>
-                    <RowDefinition Height="75"/>
-                    <RowDefinition Height="180"/>
-                    <RowDefinition Height="75"/>
-                    <RowDefinition Height="180"/>
-                    <RowDefinition Height="75"/>
-                    <RowDefinition Height="180"/>
-                    <RowDefinition Height="30"/>
-                </Grid.RowDefinitions>
-                <Border Grid.Row="1">
-                    <Border.Background>
-                        <ImageBrush ImageSource="/SSTMTerminal;component/Images/ExhibitionStep1.png" Stretch="Uniform" />
-                    </Border.Background>
-                </Border>
-                <Border Grid.Row="2" Margin="0,0,0,-18">
-                    <Border.Background>
-                        <ImageBrush ImageSource="/SSTMTerminal;component/Images/StepConnector.png" Stretch="Uniform" />
-                    </Border.Background>
-                </Border>
-                <Border Grid.Row="3">
-                    <Border.Background>
-                        <ImageBrush ImageSource="/SSTMTerminal;component/Images/ExhibitionStep2.png" Stretch="Uniform" />
-                    </Border.Background>
-                </Border>
-                <Border Grid.Row="4" Margin="0,0,0,-18">
-                    <Border.Background>
-                        <ImageBrush ImageSource="/SSTMTerminal;component/Images/StepConnector.png" Stretch="Uniform" />
-                    </Border.Background>
-                </Border>
-                <Border Grid.Row="5">
-                    <Border.Background>
-                        <ImageBrush ImageSource="/SSTMTerminal;component/Images/ExhibitionStep3Chosen.png" Stretch="Uniform" />
-                    </Border.Background>
-                </Border>
-                <Border Grid.Row="6" Margin="0,0,0,-18">
-                    <Border.Background>
-                        <ImageBrush ImageSource="/SSTMTerminal;component/Images/StepConnector.png" Stretch="Uniform" />
-                    </Border.Background>
-                </Border>
-                <Border Grid.Row="7">
-                    <Border.Background>
-                        <ImageBrush ImageSource="/SSTMTerminal;component/Images/ExhibitionStep4.png" Stretch="Uniform" />
-                    </Border.Background>
-                </Border>
-            </Grid>
-
-            <GridSplitter Grid.Column="2" Width="2" BorderBrush="WhiteSmoke" IsHitTestVisible="False" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" />
-
-            <Grid Grid.Column="4">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="100" />
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="10" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50" />
-                        <RowDefinition Height="10" />
-                        <RowDefinition Height="50" />
-                        <RowDefinition Height="10" />
-                        <RowDefinition Height="50" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="票种:" Grid.Row="0" Grid.Column="0" FontSize="38" Foreground="WhiteSmoke" FontFamily="微软雅黑" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock Text="{Binding ExhibitionTicketType}" Grid.Row="0" Grid.Column="2" FontSize="35" Foreground="WhiteSmoke" FontFamily="微软雅黑" HorizontalAlignment="Left" VerticalAlignment="Center"  />
-                    <TextBlock Text="单价:" Grid.Row="2" Grid.Column="0" FontSize="38" Foreground="WhiteSmoke" FontFamily="微软雅黑" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock Text="{Binding ExhibitionTicketPrice}" Grid.Row="2" Grid.Column="2" FontSize="35" Foreground="WhiteSmoke" FontFamily="微软雅黑" HorizontalAlignment="Left" VerticalAlignment="Center"  />
-                    <TextBlock Text="时段:" Grid.Row="4" Grid.Column="0" FontSize="38" Foreground="WhiteSmoke" FontFamily="微软雅黑" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock Text="{Binding DateTime}" Grid.Row="4" Grid.Column="2" FontSize="35" Foreground="WhiteSmoke" FontFamily="微软雅黑" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                </Grid>
-                <Grid Grid.Row="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="10" />
-                        <RowDefinition Height="50" />
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="10" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="参观人数(单次限购5张):" Grid.Column="0" FontSize="38" Foreground="WhiteSmoke" FontFamily="微软雅黑" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                        <TextBlock Text="{Binding VisitorCount}" Grid.Column="2" FontSize="35" Foreground="WhiteSmoke" FontFamily="微软雅黑" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    </Grid>
-                </Grid>
-                <Grid Grid.Row="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="20" />
-                        <RowDefinition Height="80" />
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="180" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="180" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="180" />
-                        </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Command="{Binding SwipAddVisitorCommand}" IsEnabled="{Binding CanAddVisitor}" OverridesDefaultStyle="True" HorizontalAlignment="Left">
-                            <Button.Content>
-                                <Image Source="/SSTMTerminal;component/Images/SwipAddVisitorBtn.png" />
-                            </Button.Content>
-                        </Button>
-                        <Button Grid.Column="2" Command="{Binding ManualAddVisitorCommand}" IsEnabled="{Binding CanAddVisitor}" OverridesDefaultStyle="True" HorizontalAlignment="Center">
-                            <Button.Content>
-                                <Image Source="/SSTMTerminal;component/Images/ManualAddVisitorBtn.png" />
-                            </Button.Content>
-                        </Button>
-                        <Button Grid.Column="4" Command="{Binding SwipAddForeignerVisitorCommand}" IsEnabled="{Binding CanAddVisitor}" OverridesDefaultStyle="True" HorizontalAlignment="Right">
-                            <Button.Content>
-                                <Image Source="/SSTMTerminal;component/Images/SwipAddForeignerVisitorBtn.png" />
-                            </Button.Content>
-                        </Button>
-                    </Grid>
-                </Grid>
-                <Grid Grid.Row="4" Width="550">
-                    <ListBox x:Name="VisitorListBox" 
-                             ItemsSource="{Binding Visitors}"
-                             BorderBrush="Transparent"
-                             BorderThickness="0"
-                             SelectionMode="Single"
-                             Background="Transparent"
-                             HorizontalAlignment="Left"
-                             ItemContainerStyle="{DynamicResource ListBoxItemTransparentSelectedStyle}">
-                        <ListBox.Resources>
-                            <Style TargetType="{x:Type ScrollViewer}">
-                                <Setter Property="HorizontalScrollBarVisibility" Value="Hidden"/>
-                            </Style>
-                        </ListBox.Resources>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate >
-                                <Border Width="540" Height="87" Margin="0,0,0,15">
-                                    <Border.Background>
-                                        <ImageBrush ImageSource="{Binding VisitorImagePath, UpdateSourceTrigger=PropertyChanged}" Stretch="None"/>
-                                    </Border.Background>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="10" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Text="{Binding ID}" Grid.Column="0" 
-                                                       HorizontalAlignment="Left"
-                                                       VerticalAlignment="Center"
-                                                       FontSize="36" FontFamily="微软雅黑"
-                                                       Margin="20,0,10,0" />
-                                        <Button Grid.Column="2" Width="50" Height="50"
-                                                    VerticalAlignment="Center" Margin="10,0,20,0"
-                                                    Command="{Binding DataContext.DeleteVisitorCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}}"
-                                                    OverridesDefaultStyle="True"
-                                                    CommandParameter="{Binding Path=DataContext, RelativeSource={RelativeSource Self}}">
-                                            <Button.Content>
-                                                <Image Source="/SSTMTerminal;component/Images/Clear.png" />
-                                            </Button.Content>
-                                        </Button>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </Grid>
-
-                <Button Grid.Row="6" Width="300" FontFamily="微软雅黑" FontSize="32" Content="{Binding PayTicketCommandText}" Command="{Binding PayForTicketsCommand}" IsEnabled="{Binding IsPayForTicketsEnabled}" OverridesDefaultStyle="True" HorizontalAlignment="Right">
-                    <Button.Background>
-                        <ImageBrush ImageSource="{Binding PayForTicketsBgImageSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    </Button.Background>
-                </Button>
-
-                <!--<Grid Grid.Row="4">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="20" />
-                        <ColumnDefinition Width="180" />
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="70" />
-                            <ColumnDefinition Width="60" />
-                            <ColumnDefinition Width="90" />
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="60" />
-                            <ColumnDefinition Width="90" />
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Orientation="Vertical" Grid.Column="0" >
-                            <Label Content="支付" FontSize="28" FontFamily="微软雅黑" Foreground="WhiteSmoke" />
-                            <Label Content="方式" FontSize="28" FontFamily="微软雅黑" Foreground="WhiteSmoke"/>
-                        </StackPanel>
-                        <Button Grid.Column="1" Width="52" Height="52" Margin="-2" HorizontalAlignment="Right" VerticalAlignment="Center"
-                                Command="{Binding UseWeChatPayCommand}" OverridesDefaultStyle="True">
-                            <Button.Content>
-                                <Image Source="{Binding WeChatPayCheckImageSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            </Button.Content>
-                        </Button>
-                        <Border Grid.Column="2">
-                            <Border.Background>
-                                <ImageBrush ImageSource="/SSTMTerminal;component/Images/WeChatPay.png" Stretch="UniformToFill" />
-                            </Border.Background>
-                        </Border>
-
-                        <Button Grid.Column="4" Width="52" Height="52" Margin="-2" HorizontalAlignment="Right" VerticalAlignment="Center"
-                                Command="{Binding UseAliPayCommand}" OverridesDefaultStyle="True">
-                            <Button.Content>
-                                <Image Source="{Binding AliPayCheckImageSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            </Button.Content>
-                        </Button>
-                        <Border Grid.Column="5">
-                            <Border.Background>
-                                <ImageBrush ImageSource="/SSTMTerminal;component/Images/AliPay.png" Stretch="UniformToFill" />
-                            </Border.Background>
-                        </Border>
-                    </Grid>
-
-                    <Button Grid.Column="2" Width="180" FontFamily="微软雅黑" FontSize="32" Content="{Binding PayTicketCommandText}" Command="{Binding PayForTicketsCommand}" IsEnabled="{Binding IsPayForTicketsEnabled}" OverridesDefaultStyle="True" HorizontalAlignment="Left">
-                        <Button.Background>
-                            <ImageBrush ImageSource="{Binding PayForTicketsBgImageSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                        </Button.Background>
-                    </Button>
-                </Grid>-->
-            </Grid>
-        </Grid>
-
-        <GridSplitter Grid.Row="8" Height="2" BorderBrush="WhiteSmoke" IsHitTestVisible="False" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" />
-
-        <!--<Border Grid.Row="8">
-            <Border.Background>
-                <ImageBrush ImageSource="/SSTMTerminal;component/Images/BookingNotice.png" Stretch="Fill" />
-            </Border.Background>
-        </Border>-->
     </Grid>
 </UserControl>

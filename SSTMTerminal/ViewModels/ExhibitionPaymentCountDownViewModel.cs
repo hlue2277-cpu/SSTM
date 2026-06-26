@@ -234,7 +234,7 @@ namespace SSTMTerminal.ViewModels
             }
             else
             {
-                MessageLine1 = "请将微信、支付宝或者银联付款码";
+                MessageLine1 = "请将微信、支付宝付款码";
                 MessageLine2 = "置于下方扫码口，扫码完成支付";
             }
         }

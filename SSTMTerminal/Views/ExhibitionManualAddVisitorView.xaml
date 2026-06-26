@@ -406,7 +406,7 @@
 
             <Button Grid.Column="0" Command="{Binding BackToOwnerCommand}" OverridesDefaultStyle="True" HorizontalAlignment="Left">
                 <Button.Content>
-                    <Image Source="/SSTMTerminal;component/Images/BackSmall.png" />
+                    <Image Source="/SSTMTerminal;component/Images/BackRed108.png" />
                 </Button.Content>
             </Button>
             <Button Grid.Column="2" Command="{Binding ConfirmAddVisitorCommand}" IsEnabled="{Binding IsConfirmAddVisitorEnabled}" OverridesDefaultStyle="True" HorizontalAlignment="Right">

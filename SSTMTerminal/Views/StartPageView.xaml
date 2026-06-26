@@ -31,7 +31,7 @@
                 <!-- 开始购票按钮 -->
                 <Button Command="{Binding StartBuyingCommand}"
         Width="520" Height="100"
-        Margin="0,0,0,80"
+        Margin="200,0,200,52"
         VerticalAlignment="Bottom"
         HorizontalAlignment="Center"
         Background="#FF006400"

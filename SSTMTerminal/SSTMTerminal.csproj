@@ -845,6 +845,9 @@
     <Resource Include="Images\StartPoster.png" />
     <Resource Include="Images\Exhibition1.png" />
     <Resource Include="Images\Exhibition2.png" />
+    <Resource Include="Images\ForeignID.png" />
+    <Resource Include="Images\IDCard.png" />
+    <Resource Include="Images\ManualInput.png" />
     <Content Include="Sounds\printed.WAV">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

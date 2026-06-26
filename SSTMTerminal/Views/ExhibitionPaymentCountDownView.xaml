@@ -46,7 +46,7 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"
-						   FontSize="38" FontFamily="微软雅黑" Text="请将微信、支付宝或者银联付款码" />
+						   FontSize="38" FontFamily="微软雅黑" Text="请将微信、支付宝付款码" />
                 <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"
 					   FontSize="38" FontFamily="微软雅黑" Text="置于下方扫码口，扫码完成支付" />
 
@@ -88,11 +88,16 @@
             </Grid>
         </Border>
 
-        <Button Grid.Row="4" Width="844" Command="{Binding BackToHomeCommand}"
-				Visibility="{Binding BackButtonVisibility}" OverridesDefaultStyle="True">
-            <Button.Content>
-                <Image Source="/SSTMTerminal;component/Images/BackBig.png" />
-            </Button.Content>
+        <Button Grid.Row="4" Width="844" Height="95"
+        Command="{Binding BackToHomeCommand}"
+        Visibility="{Binding BackButtonVisibility}"
+        Background="#1A3C34"
+        Foreground="White"
+        FontSize="32"
+        FontWeight="Bold"
+        BorderThickness="0"
+        Cursor="Hand">
+            返回
         </Button>
     </Grid>
 </controls:NotifyUC>

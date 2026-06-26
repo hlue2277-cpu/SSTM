@@ -57,7 +57,7 @@
 		<Button Grid.Row="4" Width="844" Command="{Binding BackToHomeCommand}"
 				Visibility="{Binding BackButtonVisibility}" OverridesDefaultStyle="True">
 			<Button.Content>
-				<Image Source="/SSTMTerminal;component/Images/BackBig.png" />
+                <Image Source="/SSTMTerminal;component/Images/BackRed108.png" />
 			</Button.Content>
 		</Button>
 	</Grid>
