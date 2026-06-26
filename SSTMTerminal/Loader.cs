@@ -1502,6 +1502,7 @@ namespace SSTMTerminal
 
             bool isAvailable = slot.data.reservePeriod.status == "Y" && slotItem.RemainingTickets > 0;
             slotItem.IsAvailable = isAvailable;
+            slotItem.NotAvailable = !isAvailable;
 
             return slotItem;
         }

@@ -41,5 +41,6 @@ namespace SSTMTerminal.Models
         public string sessionName { get; set; }     // 展厅名称
         public int RemainingTickets { get; set; }   // 剩余票数
         public string ShowTime { get; set; }        // 开演时间（可选）
+        public bool NotAvailable { get; set; }
     }
 }
