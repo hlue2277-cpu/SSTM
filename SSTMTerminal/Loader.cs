@@ -299,35 +299,16 @@ namespace SSTMTerminal
                     var mockedExhibitionTicketTypes = new ExhibitionTicketTypesModel();
                     mockedExhibitionTicketTypes.ExhibitionName = slotItem.DisplayName;
                     var item1 = new ExhibitionTicketType();
-                    item1.TicketType = "全价票";
-                    item1.TicketPrice = 100;
-                    item1.TicketPriceString = "100元";
-                    item1.TicketTypeDescription = "适用于18-60岁成年人购买";
-                    item1.IsAvailable = true;
+                    item1.TicketType = "NA";
+                    item1.TicketPrice = 1;
+                    item1.TicketPriceString = "NA";
+                    item1.TicketTypeDescription = "暂无可用票类型";
+                    item1.IsAvailable = false;
                     item1.ScheduleId = 19;
                     item1.ReservePeriodId = 1271;
                     item1.TimeRange = slotItem.TimeRange;
-                    var item2 = new ExhibitionTicketType();
-                    item2.TicketType = "优惠票";
-                    item2.TicketPrice = 50;
-                    item2.TicketPriceString = "50元";
-                    item2.TicketTypeDescription = GetTicketTypeDescriptionWithLineBreak("适用于60岁(含)以上老年人或者军人购买，入场需提供相关证件!!适用于60岁(含)以上老年人或者军人购买，入场需提供相关证件");
-                    item2.IsAvailable = true;
-                    item2.ScheduleId = 19;
-                    item2.ReservePeriodId = 1271;
-                    item2.TimeRange = slotItem.TimeRange;
-                    var item3 = new ExhibitionTicketType();
-                    item3.TicketType = "免费票";
-                    item3.TicketPrice = 0;
-                    item3.TicketPriceString = "0元";
-                    item3.TicketTypeDescription = "适用于身高小于1.3米的小朋友购买";
-                    item3.IsAvailable = true;
-                    item3.ScheduleId = 19;
-                    item3.ReservePeriodId = 1271;
-                    item3.TimeRange = slotItem.TimeRange;
+                    
                     mockedExhibitionTicketTypes.ExhibitionTicketTypes.Add(item1);
-                    mockedExhibitionTicketTypes.ExhibitionTicketTypes.Add(item2);
-                    mockedExhibitionTicketTypes.ExhibitionTicketTypes.Add(item3);
                     ExhibitionTicketTypeListView.SetExhibitionTimeSlotAndTicketTypes(slotItem, mockedExhibitionTicketTypes);
                 }
 

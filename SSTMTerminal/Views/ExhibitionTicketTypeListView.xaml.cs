@@ -18,10 +18,10 @@ namespace SSTMTerminal.Views
 
         private void OnExhibitionTicketTypeSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(this.DataContext != null && this.DataContext is ExhibitionTicketTypeListViewModel vm)
-            {
-                vm.SelectExhibitionTicketTypeCommand.Execute(ExhibitionTicketTpyeListBox.SelectedItem);
-            }
+            //if(this.DataContext != null && this.DataContext is ExhibitionTicketTypeListViewModel vm)
+            //{
+            //    vm.SelectExhibitionTicketTypeCommand.Execute(ExhibitionTicketTpyeListBox.SelectedItem);
+            //}
         }
     }
 }
