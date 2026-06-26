@@ -46,7 +46,8 @@
                             <Border Background="White"
                 BorderBrush="#E5E5E5"
                 BorderThickness="2" 
-                Padding="35,28">
+                CornerRadius="18"
+                Padding="35,32">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
@@ -54,24 +55,26 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <!-- 时间段 + 展厅名称 -->
-                                    <StackPanel Grid.Column="0" VerticalAlignment="Center" Width="280">
-                                        <TextBlock Text="{Binding sessionName}" FontSize="26" Foreground="#1A3C34" FontWeight="Medium"/>
-                                        <TextBlock Text="{Binding DisplayName}" FontSize="32" FontWeight="Medium" Foreground="#1A3C34"/>
+                                    <!-- 左侧：展厅名称 + 时间段 -->
+                                    <StackPanel Grid.Column="0" VerticalAlignment="Center" Width="300">
+                                        <TextBlock Text="{Binding DisplayName}" 
+                               FontSize="31" FontWeight="Medium" Foreground="#1A3C34"
+                               TextWrapping="Wrap" LineHeight="36"/>
                                     </StackPanel>
 
-                                    <!-- 开演时间 -->
-                                    <StackPanel Grid.Column="1" Margin="40,0,0,0" VerticalAlignment="Center">
-                                        <TextBlock Text="开演时间" FontSize="18" Foreground="#666"/>
-                                        <TextBlock Text="{Binding ShowTime}" FontSize="24" FontWeight="Medium" Foreground="#1A3C34"/>
+                                    <!-- 中间：开演时间 -->
+                                    <StackPanel Grid.Column="1" Margin="50,0,0,0" VerticalAlignment="Center">
+                                        <TextBlock Text="开演时间" FontSize="17" Foreground="#666" Margin="0,0,0,4"/>
+                                        <TextBlock Text="{Binding ShowTime, StringFormat='{}{0}点'}" 
+                               FontSize="27" FontWeight="Medium" Foreground="#1A3C34"/>
                                     </StackPanel>
 
-                                    <!-- 剩余票数 -->
-                                    <StackPanel Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                        <TextBlock Text="{Binding RemainingTickets, StringFormat='点剩余: {0}'}" 
-                               FontSize="22" Foreground="#1A3C34" TextAlignment="Right"/>
+                                    <!-- 右侧：剩余票数 -->
+                                    <StackPanel Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Width="140">
+                                        <TextBlock Text="{Binding RemainingTickets, StringFormat='剩余: {0}'}" 
+                               FontSize="21" Foreground="#1A3C34" TextAlignment="Right"/>
                                         <TextBlock Text="{Binding IsAvailable, Converter={StaticResource booleanToVisibilityConverter}, ConverterParameter=FalseTo无法预约}"
-                               FontSize="17" Foreground="#D2001E" TextAlignment="Right" Margin="0,4,0,0"/>
+                               FontSize="16" Foreground="#D2001E" TextAlignment="Right" Margin="0,8,0,0"/>
                                     </StackPanel>
                                 </Grid>
                             </Border>

@@ -1407,6 +1407,56 @@ namespace SSTMTerminal
         //    return slotItem;
         //}
 
+        //private SlotItem PopulateSlotItem(ReserveSlotDetailResponse slot, int? scheduleId, string payMethod, bool needToCheckTickStock)
+        //{
+        //    var slotItem = new SlotItem();
+        //    slotItem.PayMethod = payMethod;
+        //    slotItem.ReservePeriodId = slot.data.reservePeriod.id;
+
+        //    if (scheduleId.HasValue)
+        //        slotItem.ScheduleId = scheduleId.Value;
+
+        //    // ==================== 时间处理 ====================
+        //    string startTimeStr = "";
+        //    string endTimeStr = "";
+
+        //    if (!string.IsNullOrEmpty(slot.data.reservePeriod.starttime))
+        //    {
+        //        var start = Convert.ToDateTime(JsonHelper.ConvertToDateTime(slot.data.reservePeriod.starttime));
+        //        startTimeStr = start.ToString("HH:mm");
+        //    }
+
+        //    if (!string.IsNullOrEmpty(slot.data.reservePeriod.endtime))
+        //    {
+        //        var end = Convert.ToDateTime(JsonHelper.ConvertToDateTime(slot.data.reservePeriod.endtime));
+        //        endTimeStr = end.ToString("HH:mm");
+        //    }
+
+        //    slotItem.TimeRange = $"{startTimeStr}-{endTimeStr}";
+        //    slotItem.DisplayName = $"{startTimeStr}-{endTimeStr}";
+
+        //    // 显示展厅名称（非常重要！）
+        //    if (!string.IsNullOrEmpty(slot.data.reservePeriod.sessionName))
+        //    {
+        //        slotItem.DisplayName = slot.data.reservePeriod.sessionName + " " + slotItem.DisplayName;
+        //    }
+
+        //    // ==================== 剩余票数 ====================
+        //    int total = slot.data.reservePeriod.visitorsnum;
+        //    int used = slot.data.reservePeriod.usedNum4Other;
+        //    int remaining = total - used;
+
+        //    slotItem.RemainingTickets = remaining > 0 ? remaining : 0;
+
+        //    // 是否可用
+        //    bool isAvailable = slot.data.reservePeriod.status == "Y" && remaining > 0;
+
+        //    slotItem.IsAvailable = isAvailable;
+        //    slotItem.TimeSlotImagePath = isAvailable ? ImagePath.ItemRectangle : ImagePath.ItemRectangleDisabled;
+
+        //    return slotItem;
+        //}
+
         private SlotItem PopulateSlotItem(ReserveSlotDetailResponse slot, int? scheduleId, string payMethod, bool needToCheckTickStock)
         {
             var slotItem = new SlotItem();
@@ -1416,9 +1466,10 @@ namespace SSTMTerminal
             if (scheduleId.HasValue)
                 slotItem.ScheduleId = scheduleId.Value;
 
-            // ==================== 时间处理 ====================
+            // 时间处理
             string startTimeStr = "";
             string endTimeStr = "";
+            string showTimeStr = "";
 
             if (!string.IsNullOrEmpty(slot.data.reservePeriod.starttime))
             {
@@ -1430,29 +1481,27 @@ namespace SSTMTerminal
             {
                 var end = Convert.ToDateTime(JsonHelper.ConvertToDateTime(slot.data.reservePeriod.endtime));
                 endTimeStr = end.ToString("HH:mm");
+
+                // 开演时间 = endtime + 15分钟
+                var showTime = end.AddMinutes(15);
+                showTimeStr = showTime.ToString("HH:mm");
             }
 
             slotItem.TimeRange = $"{startTimeStr}-{endTimeStr}";
-            slotItem.DisplayName = $"{startTimeStr}-{endTimeStr}";
+            //slotItem.DisplayName = slot.data.reservePeriod.sessionName ?? "未知展厅";
+            slotItem.DisplayName = slot.data.reservePeriod.sessionName ?? "未知展厅";
+            slotItem.DisplayName = slotItem.DisplayName + "\r\n" + slotItem.TimeRange;
 
-            // 显示展厅名称（非常重要！）
-            if (!string.IsNullOrEmpty(slot.data.reservePeriod.sessionName))
-            {
-                slotItem.DisplayName = slot.data.reservePeriod.sessionName + " " + slotItem.DisplayName;
-            }
+            // 新增开演时间属性
+            slotItem.ShowTime = showTimeStr;
 
-            // ==================== 剩余票数 ====================
+            // 剩余票数
             int total = slot.data.reservePeriod.visitorsnum;
             int used = slot.data.reservePeriod.usedNum4Other;
-            int remaining = total - used;
+            slotItem.RemainingTickets = Math.Max(total - used, 0);
 
-            slotItem.RemainingTickets = remaining > 0 ? remaining : 0;
-
-            // 是否可用
-            bool isAvailable = slot.data.reservePeriod.status == "Y" && remaining > 0;
-
+            bool isAvailable = slot.data.reservePeriod.status == "Y" && slotItem.RemainingTickets > 0;
             slotItem.IsAvailable = isAvailable;
-            slotItem.TimeSlotImagePath = isAvailable ? ImagePath.ItemRectangle : ImagePath.ItemRectangleDisabled;
 
             return slotItem;
         }
